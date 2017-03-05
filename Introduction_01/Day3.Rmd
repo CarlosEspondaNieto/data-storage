@@ -1,0 +1,9 @@
+---
+title: "Day3"
+author: "Jorge Alcaraz"
+date: "5/3/2017"
+output: slidy_presentation
+---
+
+## Data Processing
+
