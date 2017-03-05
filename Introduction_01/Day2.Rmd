@@ -233,3 +233,65 @@ title = buyers = tree.xpath('//title/text()')
 
 
 ## Data Integration
+
+Data integration involves combining data residing in different sources and providing users with a unified view of these data.[1] This process becomes significant in a variety of situations, which include both commercial (when two similar companies need to merge their databases) and scientific (combining research results from different bioinformatics repositories, for example) domains. Data integration appears with increasing frequency as the volume and the need to share existing data explodes.[2] It has become the focus of extensive theoretical work, and numerous open problems remain unsolved.
+
+[Source: Wikipedia](https://en.wikipedia.org/wiki/Data_integration)
+
+## Data Integration Pattern
+
+![Data Integration](images/diglobal.png)
+
+## Formal Framework
+
+A **data integration system** *I* is a triple <*G, S, M*>, where
+
+* G is the global schema (Over an alphabet *A~G*)
+
+## ETL
+
+#### Extract Transform and Load
+
+![ETL](images/dwh.png)
+
+
+## Common Data Integration Common Solution
+
+![Data Integration](images/di.png)
+
+## Data Integration Solutions
+
+[Data Integration and Application Integration Solutions Directory](https://solutionsreview.com/data-integration/data-integration-solutions-directory/)
+
+## Connecting to PostgreSQL
+
+```{python, eval = FALSE}
+>>> import psycopg2
+
+# Connect to an existing database
+>>> conn = psycopg2.connect("dbname=test user=postgres")
+
+# Open a cursor to perform database operations
+>>> cur = conn.cursor()
+
+# Execute a command: this creates a new table
+>>> cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+
+# Pass data to fill a query placeholders and let Psycopg perform
+# the correct conversion (no more SQL injections!)
+>>> cur.execute("INSERT INTO test (num, data) VALUES (%s, %s)",
+...      (100, "abc'def"))
+
+# Query the database and obtain data as Python objects
+>>> cur.execute("SELECT * FROM test;")
+>>> cur.fetchone()
+(1, 100, "abc'def")
+
+# Make the changes to the database persistent
+>>> conn.commit()
+
+# Close communication with the database
+>>> cur.close()
+>>> conn.close()
+```
+
