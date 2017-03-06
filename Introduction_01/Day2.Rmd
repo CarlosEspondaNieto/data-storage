@@ -295,5 +295,6 @@ A **data integration system** *I* is a triple <*G, S, M*>, where
 >>> conn.close()
 ```
 
-
 ## Quiz
+
+> http://bit.ly/2munCQO
