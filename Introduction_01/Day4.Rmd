@@ -1,0 +1,46 @@
+---
+title: "Interface with BBVA & "
+author: "Jorge Alcaraz"
+date: "5/3/2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## DaaS
+
+In computing, data as a service (or DaaS) is a cousin of software as a service (SaaS).[1] Like all members of the "as a service" (aaS) family, DaaS builds on the concept that the product (data in this case) can be provided on demand[2] to the user regardless of geographic or organizational separation of provider and consumer. Additionally, the emergence[when?] of service-oriented architecture (SOA) has also rendered the actual platform on which the data resides irrelevant.[3] This development has enabled the emergence of the relatively new concept of DaaS.
+
+## Common deployment scenarios
+
+
+
+
+[Source: Wikipedia](https://en.wikipedia.org/wiki/Data_as_a_service)
+
+## DBaaS
+
+
+
+[Another source: Oracle (Spanish)](http://www.oracle.com/technetwork/es/articles/cloudcomp/oracle-cloud-dbaas-2877305-esa.html)
+
+
+## Typical use case samples
+
+* Retention
+* Acquisition
+* Usage
+
+
+## Quote for thinking in the customer
+
+> If you don't pay for the product, then you're the product
+
+## Some architectural notes
+
+* The importance of real time analysis
+* The importance of batch processing
+* Mixing
+* 
