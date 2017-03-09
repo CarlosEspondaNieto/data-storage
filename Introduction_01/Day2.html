@@ -335,7 +335,7 @@ title <span class="op">=</span> buyers <span class="op">=</span> tree.xpath(<spa
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> psycopg2
 
 <span class="co"># Connect to an existing database</span>
-<span class="op">&gt;&gt;&gt;</span> conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(<span class="st">&quot;dbname=test user=postgres&quot;</span>)
+conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(<span class="st">&quot;dbname=test user=postgres password=secret&quot;</span>)
 
 <span class="co"># Open a cursor to perform database operations</span>
 <span class="op">&gt;&gt;&gt;</span> cur <span class="op">=</span> conn.cursor()

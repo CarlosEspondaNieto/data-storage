@@ -269,7 +269,7 @@ A **data integration system** *I* is a triple <*G, S, M*>, where
 >>> import psycopg2
 
 # Connect to an existing database
->>> conn = psycopg2.connect("dbname=test user=postgres")
+conn = psycopg2.connect("dbname=test user=postgres password=secret")
 
 # Open a cursor to perform database operations
 >>> cur = conn.cursor()
