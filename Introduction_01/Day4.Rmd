@@ -73,6 +73,7 @@ Analysis of data, also known as data analytics, is a process of inspecting, clea
 
 
 
+
 ## Background: Data science competitions
 
 In Kaggle competitions, you are given a training set, and also a test set where the ys are hidden, but the xs are given, so you just use your model to get your predicted xs for the test set and upload them into the Kaggle system to see your evaluation score.
