@@ -1,0 +1,1000 @@
+   10  mkdir curso_linux
+   11  mv script.bash curso_linux/
+   12  ls
+   13  history > commands06-03-17.txt
+   14  ls
+   15  mv commands06-03-17.txt curso_linux/
+   16  cd curso_linux/
+   17  ls
+   18  exit
+   19  bash
+   20  cd
+   21  ls
+   22  cd data-storage/
+   23  ls
+   24  cd data-graduates/
+   25  ls
+   26  cd Introduction_01/
+   27  ls
+   28  ls -la
+   29  cd ..
+   30  ls
+   31  pull
+   32  ls
+   33  cd ..
+   34  ls
+   35  cd ..
+   36  ls
+   37  cd data-graduatess/
+   38  ls
+   39  cd ..
+   40  cd data-storage/
+   41  git add *
+   42  sudo git add *
+   43  ls
+   44  sudo git add --ALL
+   45  sudo git add --all
+   46  git status
+   47  git commit -m "activities from today 06-03-17"
+   48  sudo git commit -m "activities from today 06-03-17"
+   49  sudo git push origin develop
+   50  exit
+   51  ps -efa | grep python
+   52  netstat -nap
+   53  man export
+   54  ls -la
+   55  id ec2-user
+   56  id administradorcito
+   57  history
+   58  sudo mkdir /opt/test
+   59  sudo ls -al /opt/
+   60  su
+   61  pwd
+   62  cd /opt/
+   63  ls -l
+   64  sudo chown administradorcito test
+   65  ls -l
+   66  sudo chown :administradorcito test
+   67  ls -l
+   68  cd test/
+   69  ls
+   70  ls -la
+   71  touch test
+   72  rm test
+   73  touch archivo 
+   74  ls -la
+   75  wc -l
+   76  ls
+   77  echo ejemplo > new.txt
+   78  cat new.txt 
+   79  ls -la
+   80  sudo yum search httpd
+   81  sudo yum install httpd
+   82  id httpd
+   83   id httpd
+   84  history
+   85  id administradorcito
+   86  sudo yum search httpd
+   87  sudo yum install httpd
+   88  dhclient p4p2
+   89  sudo dhclient p4p2
+   90  sudo yum install httpd
+   91  id httpd
+   92  sudo id httpd
+   93  sudo apache
+   94  sudo su apache
+   95  sudo usermod -s /sbin/nologin apache
+   96  sudo su apache
+   97  cat /sbin/nologin 
+   98  cat /etc/paswwd
+   99  cat /etc/passwd
+  100  sudo usermod -s /bin/bash apache
+  101  sudo su apache
+  102  ping google.com
+  103  sudo su apache
+  104  cat /etc/passwd
+  105  sudo usermod -s /sbin/nologin apache
+  106  cat /etc/passwd
+  107  sudo service http status
+  108  sudo service httpd status
+  109  sudo service httpd start
+  110  sudo service httpd status
+  111  sudo ps -efa | grep apache
+  112  sudo dhclient apache
+  113  sudo netstap -nap | grep 80
+  114  sudo netstat -nap | grep 80
+  115  man netstat
+  116  iptable -l
+  117  iptable 
+  118  sudo iptable 
+  119  man iptable
+  120  ip-table
+  121  sudo iptable 
+  122  man netstat
+  123  sudo iptables -l  
+  124  sudo iptables
+  125  sudo iptables -L
+  126  sudo netstat -nap | grep httpd
+  127  cd /etc/
+  128  cd
+  129  ls
+  130  sudo cd /etc/
+  131  sudo cd /etc/httpd/conf/
+  132  ls
+  133  sudo cd /etc/httpd/conf/
+  134  ls
+  135  sudo cd /etc/httpd/conf/
+  136  sudo vi /etc/httpd/conf/httpd.conf 
+  137  man netstat
+  138  echo "Hola mundo" > saludo.txt
+  139  cat saludo.txt 
+  140  vim script.bash
+  141  chmod +x script.bash
+  142  ./script.bash
+  143  vim script.bash
+  144  ./script.bash
+  145  vim script.bash
+  146  ./script.bash
+  147  vim script.bash
+  148  python
+  149  vim script.bash
+  150  ./script.bash
+  151  vim script.bash
+  152  ./script.bash
+  153  ls
+  154  mv saludo.txt  script.bash /opt/test/
+  155  exit
+  156  startx
+  157  source env/bin/activate
+  158  cd data-storage/
+  159  ls
+  160  source env/bin/activate
+  161  vim merge_pandas.py 
+  162  sudo vim merge_pandas.py 
+  163  python merge_pandas.py 
+  164  python3 merge_pandas.py 
+  165  python3.5 merge_pandas.py 
+  166  pythonmerge_pandas.py 
+  167  python merge_pandas.py 
+  168  sudo vim merge_pandas.py 
+  169  python --version
+  170  python merge_pandas.py 
+  171  pip install pandas
+  172  sudo pip install pandas
+  173  python merge_pandas.py 
+  174  deactivate
+  175  source env/bin/activate
+  176  python merge_pandas.py 
+  177  deactivate
+  178  python merge_pandas.py 
+  179  sudo vim merge_pandas.py 
+  180  python merge_pandas.py 
+  181  sudo vim merge_pandas.py 
+  182  source env/bin/activate
+  183  python merge_pandas.py 
+  184  deactivate
+  185  ls
+  186  cd data
+  187  cd ..
+  188  cd data-graduates/
+  189  ls
+  190  cd Introduction_01/
+  191  ls
+  192  cd data/
+  193  ls
+  194  vim countries.json 
+  195  cat countries.json 
+  196  cat countries.csv 
+  197  ls
+  198  python merge_pandas.py 
+  199  cd 
+  200  cd data-storage/
+  201  source env/bin/activate
+  202  ls
+  203  vim movies2.py
+  204  sudo vim movies2.py
+  205  python3.6 movies2.py
+  206  pip install pandas
+  207  sudo pip install pandas
+  208  source env/bin/activate
+  209  python --version
+  210  python3.6 movies2.py
+  211  python --version
+  212  python2 movies2.py
+  213  pip install request
+  214  sudo pip install request
+  215  python2 movies2.py
+  216  deactivate
+  217  source env/bin/activate
+  218  python2 movies2.py
+  219  vim movies2.py
+  220  sudo vim movies2.py
+  221  ls
+  222  rm -rf moviesmovies.zip 
+  223  sudo rm -rf moviesmovies.zip 
+  224  cd data
+  225  ls
+  226  mkdir python_exercises
+  227  sudo mkdir python_exercises
+  228  cd ..
+  229  ls
+  230  mv movies2.py data/python_exercises/
+  231  sudo mv movies2.py data/python_exercises/
+  232  cd data/python_exercises/
+  233  ls
+  234  python3.6 movies2.py 
+  235  sudo install pandas
+  236  pip install pandas
+  237  sudo pip install pandas
+  238  deactivate
+  239  sudo yum install python3-pandas
+  240  cd ..
+  241  source env/bin/activate
+  242  ls
+  243  cd data
+  244  ls
+  245  cd python_exercises/
+  246  python3.6 movies2.py 
+  247  exit
+  248  dhclient p4p2
+  249  sudo dhclient p4p2
+  250  ls
+  251  cd data-graduates/
+  252  ls
+  253  cd Introduction_01/
+  254  ls
+  255  cd data/
+  256  ls
+  257  cd
+  258  cd data-
+  259  cd data-storage/
+  260  ls
+  261  cd data-graduates/
+  262  ls
+  263  cd ..
+  264  ls
+  265  cat read.csv 
+  266  vim merge_pandas.py 
+  267  sudo vim merge_pandas.py 
+  268  python merge_pandas.py 
+  269  sudo vim merge_pandas.py 
+  270  python merge_pandas.py 
+  271  sudo vim merge_pandas.py 
+  272  python merge_pandas.py 
+  273  sudo vim merge_pandas.py 
+  274  python merge_pandas.py 
+  275  sudo vim merge_pandas.py 
+  276  python merge_pandas.py 
+  277  ls
+  278  cat read.csv 
+  279  sudo vim merge_pandas.py 
+  280  python merge_pandas.py 
+  281  sudo vim merge_pandas.py 
+  282  python merge_pandas.py 
+  283  sudo vim merge_pandas.py 
+  284  python merge_pandas.py 
+  285  sudo vim merge_pandas.py 
+  286  python merge_pandas.py 
+  287  sudo vim merge_pandas.py 
+  288  python merge_pandas.py 
+  289  sudo vim merge_pandas.py 
+  290  python merge_pandas.py 
+  291  sudo vim merge_pandas.py 
+  292  python merge_pandas.py 
+  293  sudo vim merge_pandas.py 
+  294  python merge_pandas.py 
+  295  sudo vim merge_pandas.py 
+  296  python merge_pandas.py 
+  297  sudo vim merge_pandas.py 
+  298  python merge_pandas.py 
+  299  sudo vim merge_pandas.py 
+  300  python merge_pandas.py 
+  301  sudo vim merge_pandas.py 
+  302  python merge_pandas.py 
+  303  sudo vim merge_pandas.py 
+  304  python merge_pandas.py 
+  305  sudo vim merge_pandas.py 
+  306  python merge_pandas.py 
+  307  sudo vim merge_pandas.py 
+  308  python merge_pandas.py 
+  309  sudo vim merge_pandas.py 
+  310  python merge_pandas.py 
+  311  sudo vim merge_pandas.py 
+  312  source env/bin/activate
+  313  vim movies.py
+  314  sudo vim movies.py
+  315  ls
+  316  mkdir movies
+  317  sudo mkdir movies
+  318  ls
+  319  sudo vim movies.py
+  320  python movies.py
+  321  sudo vim movies.py
+  322  python movies.py
+  323  sudo vim movies.py
+  324  python movies.py
+  325  sudo vim movies.py
+  326  python movies.py
+  327  sudo vim movies.py
+  328  python movies.py
+  329  sudo vim movies.py
+  330  python movies.py
+  331  sudo vim movies.py
+  332  python movies.py
+  333  sudo vim movies.py
+  334  python movies.py
+  335  sudo vim movies.py
+  336  python movies.py
+  337  sudo vim movies.py
+  338  python movies.py
+  339  sudo vim movies.py
+  340  python movies.py
+  341  sudo vim movies.py
+  342  ls
+  343  sudo vim movies.py
+  344  cd data
+  345  ls
+  346  mkdir movies
+  347  sudo mkdir movies
+  348  cd ..
+  349  python movies.py
+  350  ls
+  351  cd d
+  352  cd data
+  353  la
+  354  ls
+  355  cd movies/
+  356  ls
+  357  cd ..
+  358  sudo vim movies.py
+  359  python movies.py
+  360  sudo python movies.py
+  361  pip install request
+  362  sudo pip install request
+  363  sudo python movies.py
+  364  sudo vim movies.py
+  365  sudo pip install urllib
+  366  sudo pip install urllib.request
+  367  deactivate
+  368  source env/bin/activate
+  369  sudo python movies.py
+  370  sudo vim movies.py
+  371  sudo pip install request
+  372  deactivate
+  373  source env/bin/activate
+  374   python movies.py
+  375  sudo vim movies.py
+  376   python movies.py
+  377  sudo  python movies.py
+  378   python3.5 movies.py
+  379  python --version
+  380   python3.6 movies.py
+  381  sudo  python3.6 movies.py
+  382  sudo vim movies.py
+  383  sudo  python3.6 movies.py
+  384  sudo vim movies.py
+  385  sudo  python3.6 movies.py
+  386  sudo vim movies.py
+  387  cd data
+  388  cd movies/
+  389  ls
+  390  cd ..
+  391  ls
+  392  cd ..
+  393  ls
+  394  cd data
+  395  ls
+  396  rm -rf moviesmovies.zip 
+  397  sudo rm -rf moviesmovies.zip 
+  398  ls
+  399  cd ..
+  400  ls
+  401  sudo vim movies.py
+  402  sudo  python3.6 movies.py
+  403  exit
+  404  cd data-storage/
+  405  mkvirtualenv -p python3 pandas_env
+  406  sudo pip install pandas
+  407  cd data
+  408  ls
+  409  cd python_exercises/
+  410  ls
+  411  python3.6 movies2.py 
+  412  python --version
+  413  python2.7 movies2.py 
+  414  sudo pip install request
+  415  python movies2.py 
+  416  exit
+  417  cd data-
+  418  cd data-storage/
+  419  ls
+  420  cd data
+  421  ls
+  422  cd python_exercises/
+  423  python movies2.py 
+  424  source ../../env/bin/activate 
+  425  python --version
+  426  python3 movies2.py 
+  427  deactivate
+  428  source ../../env/bin/activate 
+  429  python3 movies2.py 
+  430  sudo pip install pandas
+  431   
+  432  python 
+  433  python2 movies2.py 
+  434  sudo pip install request
+  435  python2.7 movies2.py 
+  436  python3.6 movies2.py 
+  437  vim movies2.py 
+  438  sudo vim movies2.py 
+  439  python3.6 movies2.py 
+  440  sudo vim movies2.py 
+  441  pwd
+  442  ls
+  443  cd ..
+  444  ls
+  445  cd movies/
+  446  ls
+  447  cd ../python_exercises/
+  448  ls
+  449  sudo vim movies2.py 
+  450  python3.6 movies2.py 
+  451  sudo python3.6 movies2.py 
+  452  cd ..
+  453  ls
+  454  cd movies/
+  455  ls
+  456  cd ..
+  457  exit
+  458  cd data-
+  459  cd data-storage/
+  460  ls
+  461  cd data-graduates/
+  462  ls
+  463  sudo git clone https://github.com/razeone/data-storage/tree/develop
+  464  sudo git 'clone https://github.com/razeone/data-storage/tree/develop'
+  465  git clone https://github.com/razeone/data-storage/tree/develop
+  466  sudo git clone https://github.com/razeone/data-storage/tree/develop
+  467   git clone https://github.com/razeone/data-storage/tree/develop
+  468  sudo git clone https://github.com/razeone/data-storage/tree/develop
+  469  ls
+  470  sudo git clone https://github.com/razeone/data-storage/
+  471  ls
+  472  cd data-storage/
+  473  ls
+  474  cd data/
+  475  ls
+  476  cd ..
+  477  ls
+  478  cd ..
+  479  ls
+  480  rm -rf data-storage/
+  481  sudo rm -rf data-storage/
+  482  ls
+  483  sudo git clone https://github.com/razeone/data-storage/tree
+  484  sudo git clone https://github.com/razeone/data-storage/tree/develop/
+  485  sudo git https://github.com/CarlosEspondaNieto/data-storage-1
+  486  sudo git clone https://github.com/CarlosEspondaNieto/data-storage-1
+  487  ls
+  488  cd data-storage-1/
+  489  ls
+  490  cd data/
+  491  ls
+  492  cd ..
+  493  ls
+  494  cd ..
+  495  ls
+  496  rm -rf data-storage-1/
+  497  sudo rm -rf data-storage-1/
+  498  sudo git clone https://github.com/razeone/data-storage/tree/develop/python_scripts
+  499  ls
+  500  cd ..
+  501  ls
+  502  cd ..
+  503   ls
+  504  cd data-storage/
+  505  ls
+  506  cd data-graduates/
+  507  ls
+  508  cd ..
+  509  ls
+  510  cd data-graduatess/
+  511  ls
+  512  cd data-storage-develop/
+  513  ls
+  514  cd python_scripts/
+  515  ls
+  516  cd
+  517  ls
+  518  cd curso_linux/
+  519  ls
+  520  vim script.bash 
+  521  sudo vim script.bash 
+  522  ./script.bash 
+  523  sudo vim script.bash 
+  524  ./script.bash 1
+  525  sudo vim script.bash 
+  526  ./script.bash 1
+  527  ls
+  528  cd /opt/test/
+  529  ls
+  530  ./script.bash 
+  531  vim script.bash 
+  532  ./script.bash 1
+  533  sudo vim script.bash 
+  534  ./script.bash 1
+  535  sudo vim script.bash 
+  536  ./script.bash 1
+  537  sudo vim script.bash 
+  538  ./script.bash 1
+  539  sudo vim script.bash 
+  540  ./script.bash 1
+  541  sudo vim script.bash 
+  542  ./script.bash 1
+  543  sudo vim script.bash 
+  544  ./script.bash 1
+  545  sudo vim script.bash 
+  546  ./script.bash 1
+  547  sudo vim script.bash 
+  548  ./script.bash 1
+  549  sudo vim script.bash 
+  550  ./script.bash 1
+  551  sudo vim script.bash 
+  552  ./script.bash 1
+  553  sudo vim script.bash 
+  554  ./script.bash 1
+  555  sudo vim script.bash 
+  556  ./script.bash 1
+  557  sudo vim script.bash 
+  558  ./script.bash 1
+  559  sudo vim script.bash 
+  560  ./script.bash 1
+  561  sudo vim script.bash 
+  562  ./script.bash 1
+  563  sudo vim script.bash 
+  564  ./script.bash 1
+  565  sudo vim script.bash 
+  566  ./script.bash 1
+  567  ./script.bash 0
+  568  ./script.bash 1
+  569  sudo vim script.bash 
+  570  ./script.bash 1
+  571  sudo vim script.bash 
+  572  ./script.bash 1
+  573  sudo vim script.bash 
+  574  ./script.bash 1
+  575  sudo vim script.bash 
+  576  ./script.bash 1
+  577  sudo vim script.bash 
+  578  ./script.bash 1
+  579  sudo vim script.bash 
+  580  ./script.bash 1
+  581  sudo vim script.bash 
+  582  ./script.bash 1
+  583  sudo vim script.bash 
+  584  ./script.bash 1
+  585  sudo vim script.bash 
+  586  ./script.bash 1
+  587  sudo vim script.bash 
+  588  ./script.bash 1
+  589  sudo vim script.bash 
+  590  ./script.bash 1
+  591  sudo vim script.bash 
+  592  ./script.bash 1
+  593  sudo vim script.bash 
+  594  ./script.bash 1
+  595  sudo vim script.bash 
+  596  ./script.bash 1
+  597  sudo vim script.bash 
+  598  ./script.bash 1
+  599  sudo vim script.bash 
+  600  ./script.bash 1
+  601  sudo vim script.bash 
+  602  ./script.bash 1
+  603  sudo vim script.bash 
+  604  ./script.bash 1
+  605  sudo vim script.bash 
+  606  ./script.bash 1
+  607  sudo vim script.bash 
+  608  ./script.bash 1
+  609  sudo vim script.bash 
+  610  ./script.bash 1
+  611  sudo vim script.bash 
+  612  ./script.bash 1
+  613  sudo vim script.bash 
+  614  ./script.bash 1
+  615  sudo vim script.bash 
+  616  ./script.bash 1
+  617  sudo vim script.bash 
+  618  ./script.bash 0
+  619  sudo vim script.bash 
+  620  ./script.bash 1
+  621  sudo vim script.bash 
+  622  ./script.bash 1
+  623  sudo vim script.bash 
+  624  ./script.bash 1
+  625  sudo vim script.bash 
+  626  ./script.bash 1
+  627  sudo vim script.bash 
+  628  ./script.bash 1
+  629  sudo vim script.bash 
+  630  ./script.bash 1
+  631  sudo vim script.bash 
+  632  ./script.bash 1
+  633  sudo vim script.bash 
+  634  ./script.bash 0
+  635  ./script.bash 2
+  636  ./script.bash 1
+  637  ./script.bash 2
+  638  sudo vim script.bash 
+  639  ./script.bash 1
+  640  sudo vim script.bash 
+  641  ls
+  642  mv script.bash /home/administradorcito/
+  643  sudo vim saludo.txt 
+  644  ls
+  645  cd
+  646  ls
+  647  mv script.bash script_carlos.bash 
+  648  ls
+  649  var="HOLA MUNDO"
+  650  echo $var
+  651  echo ${var:0:2}
+  652  echo ${var:5:5}
+  653  vim script_carlos.bash 
+  654  ./script_carlos.bash 
+  655  vim script_carlos.bash 
+  656  ./script_carlos.bash 
+  657  vim script_carlos.bash 
+  658  ./script_carlos.bash 
+  659  vim script_carlos.bash 
+  660  ./script_carlos.bash 1
+  661  ./script_carlos.bash 2
+  662  vim script_carlos.bash 
+  663  sudo sestatus
+  664  sudo setentforce 0
+  665  sudo sestatus
+  666  sudo setentforce 
+  667  sudo sestatus
+  668  sudo setentforce 
+  669  man setentforce
+  670  ifconfig
+  671  vim script_carlos.bash 
+  672  ./script_carlos.bash 
+  673  ./script_carlos.bash 1
+  674  ./script_carlos.bash 2
+  675  sudo vim script_carlos.bash 
+  676  ./script_carlos.bash 0
+  677  ./script_carlos.bash 1
+  678  sudo vim script_carlos.bash 
+  679  ./script_carlos.bash 1
+  680  sudo vim script_carlos.bash 
+  681  fierewall cbd
+  682  fierewall -cbd
+  683  fierewall -cmd
+  684  fierewall -c
+  685  iptables -l
+  686  iptable -l
+  687  netstat -nap 
+  688  netstat -nap | head
+  689  netstat -nap | head 10
+  690  netstat -nap | head(10)
+  691  ps -efa | grep postgres
+  692  netstat -nap | grep postgres
+  693  systemctl status postgres
+  694  systemctl status postgresql
+  695  netstat -nap | grep postgres
+  696  sudo netstat -nap | grep postgres
+  697  sudo netstat -nap | grep postgres | head
+  698  netstat -nap | head
+  699  sudo netstat -nap | grep postgres
+  700  cd /etc/
+  701  ls
+  702  cd /etc/postfix/
+  703  ls
+  704  cd ..
+  705  ls
+  706  ls | grep conf
+  707  ls | grep postgres.conf
+  708  ls | grep 
+  709  cd
+  710  nano postgresql.conf
+  711  ls
+  712  find / -name postgresql.conf
+  713  sudo find / -name postgresql.conf
+  714  sudo vim postgresql.conf
+  715  cd /var/lib/pgsql/
+  716  sudo cd /var/lib/pgsql/
+  717  ls
+  718  sudo cd /var/lib/pgsql/
+  719  su
+  720  systemctl restart postgres
+  721  systemctl status postgres
+  722  systemctl status postgresql
+  723  systemctl restart postgresql
+  724  systemctl status postgresql
+  725  netstat -nap | grep postgres
+  726  sudo netstat -nap | grep postgres
+  727  su 
+  728  systemctl restart postgresql
+  729  exit
+  730  dhclient p4p2
+  731  sudo dhclient p4p2
+  732  cd data-storage/
+  733  ls
+  734  cd data
+  735  ls
+  736  cd movies/
+  737  ls
+  738  cd ..
+  739  ls
+  740  cd ..
+  741  ls
+  742  cat movies
+  743  cat movies.py 
+  744  ls
+  745  cd ..
+  746  ls
+  747  cd data-graduatess/
+  748  ls
+  749  cd data-storage-develop/
+  750  ls
+  751  cd data/
+  752  ls
+  753  cd ..
+  754  cd python_scripts/
+  755  ls
+  756  cat movies.py 
+  757  ls
+  758  cd .
+  759  cd ..
+  760  ls
+  761  cd data/
+  762  ls
+  763  cd ..
+  764  ls
+  765  cd data/
+  766  ls
+  767  mkdir movies
+  768  ls
+  769  cd movies/
+  770  ls
+  771  mkdir ml-latest-small
+  772  ls
+  773  cd ../../
+  774  ls
+  775  cd python_scripts/
+  776  cd python_scriptls
+  777  ls
+  778  python3 movies.py
+  779  cd 
+  780  cd data-storage/
+  781  ls
+  782  cd 
+  783  ls
+  784  cd data-storage/
+  785  ls
+  786  cd ..
+  787  mv -rf data-graduatess/ data-storage/data-graduates/
+  788  cp data-graduatess/ data-storage/data-graduates/
+  789  ls
+  790  cd data-storage/
+  791  ls
+  792  cd data-graduates/
+  793  ls
+  794  cd ..
+  795  ls
+  796  cd ..
+  797  ls
+  798  cd data-storage/
+  799  ls
+  800  cd..
+  801  cd ..
+  802  ls
+  803  source env/bin/activate
+  804  cd data-storage/
+  805  cd data-graduates/
+  806  cd ..
+  807  ls
+  808  cd ..
+  809  ls
+  810  cd data-graduatess/
+  811  ls
+  812  mv data-storage-develop/ ../data-storage/data-graduates/
+  813  sudo mv data-storage-develop/ ../data-storage/data-graduates/
+  814  ls
+  815  cd ..
+  816  ls
+  817  cd data-storage/
+  818  ls
+  819  cd data-graduates/
+  820  ls
+  821  cd data-storage-develop/
+  822  ls
+  823  source env/bin/activate
+  824  cd ..
+  825  source env/bin/activate
+  826  ls
+  827  cd data-graduates/
+  828  cd data-storage-develop/
+  829  ls
+  830  cd python_scripts/
+  831  ls
+  832  python3 movies.py 
+  833  python --version
+  834  deactivate
+  835  source ../../env/bin/activate
+  836  source ../../../env/bin/activate
+  837  python3 movies.py 
+  838  pip install pandas
+  839  sudo pip install pandas
+  840  python2 movies.py 
+  841  cat movies.py 
+  842  sudo vim movies.py 
+  843  python2 movies.py 
+  844  sudo vim movies.py 
+  845  python2 movies.py 
+  846  sudo vim movies.py 
+  847  python --version
+  848  yum install python3-pandas
+  849  sudo yum install python3-pandas
+  850  pip install python3-pandas
+  851  pip install pandas
+  852  sudo pip install pandas
+  853  deactivate
+  854  sudo yum install python3-pandas
+  855  sudo yum install pandas
+  856  sudo yum install python3-pandas
+  857  source ../../../env/bin/activate
+  858  sudo yum install python3 -m pip install pandas
+  859  sudo yum install python34-setuptools
+  860  sudo easy_install pip
+  861  python3 movies.py 
+  862  sudo yum install python3-pip
+  863  pip --version
+  864  deactivate
+  865  source ../../../env/bin/activate
+  866  python --version
+  867  pip install pandas
+  868  sudo pip install pandas
+  869  sudo pip3 install pandas
+  870  sudo pip install pandas3
+  871  sudo python3 -m pip install pandas
+  872  pip uninstall pandas
+  873  sudo pip uninstall pandas
+  874  sudo python3 -m pip install pandas
+  875  pip --version
+  876  sudo python3 pip install pandas
+  877  sudo pip install pandas
+  878  pandas --version
+  879  deactivate
+  880  source ../../../env/bin/activate
+  881  sudo yum install python3-pandas
+  882  sudo pip install pandas lxml
+  883  sudo pip install request
+  884  pandas --version
+  885  sudo pip install pandas
+  886  python2 movies.py 
+  887  sudo vim  movies.py 
+  888  sudo pip install request
+  889  python2 movies.py 
+  890  deactivate
+  891  source ../../../env/bin/activate
+  892  python --version
+  893  sudo pip uninstall pandas
+  894  sudo pip install  python3-pandas
+  895  cat movies.py 
+  896  vim  movies.py 
+  897  python movies.py 
+  898  python2 movies.py 
+  899  vim  movies.py 
+  900  python3 movies.py 
+  901  python
+  902  pandas --version
+  903  pip3 install pandas
+  904  sudo pip3 install pandas
+  905  python3 movies.py 
+  906  sudo pip uninstall pandas
+  907  sudo pip3 install pandas3
+  908  sudo yum python3-pip
+  909  sudo yum install python3-pandas
+  910  sudo yum install python3-pip
+  911  su
+  912  pandas -version
+  913  python3 movies.py 
+  914  sudo vim movies.py 
+  915  python3 movies.py 
+  916  pip install scipy
+  917  sudo pip install scipy
+  918  python3 movies.py 
+  919  scipy --version
+  920  deactivate
+  921  source ../../../env/bin/activate
+  922  python3 movies.py 
+  923  cat movies.py 
+  924  sudo vim movies.py 
+  925  sudo uninstall scipy
+  926  pip uninstall scipy
+  927  sudo pip uninstall scipy
+  928  su
+  929  python3 movies.py 
+  930  sudo vim movies.py 
+  931  python3 movies.py 
+  932  su
+  933  python3 movies.py 
+  934  sudo vim movies.py 
+  935  python3 movies.py 
+  936  python3
+  937  ifconfig
+  938  exit
+  939  sudo vim /var/lib/pgsql/data/pg_hba.conf
+  940  systemctl restart firewalld.service
+  941  systemctl restart postgresql
+  942  systemctl status postgresql
+  943  sudo -i -u postgres
+  944  sudo vim /var/lib/pgsql/data/pg_hba.conf
+  945  sudo vim /var/lib/pgsql/data/postgresql.conf
+  946  systemctl status postgresql
+  947  systemctl restart postgresql
+  948  sudo vim /var/lib/pgsql/data/postgresql.conf
+  949  systemctl restart postgresql
+  950  sudo vim /var/lib/pgsql/data/pg_hba.conf
+  951  sudo vim /var/lib/pgsql/data/postgresql.conf
+  952  systemctl restart firewalld.service
+  953  sudo -i -u postgres
+  954  ifconfig
+  955  dhclient p4p2
+  956  ping google.com
+  957  dhclient p4p2
+  958  ping google.com
+  959  exit
+  960  dhclient p4p2
+  961  ping google.com}
+  962  ping google.com
+  963  dhclient p4p2
+  964  exit
+  965  cd
+  966  pandas --version
+  967  sudo vim /var/lib/pgsql/data/pg_hba.conf
+  968  sudo vim /var/lib/pgsql/data/postgresql.conf
+  969  systemctl postgres status
+  970  systemctl postgresql status
+  971  systemctl status postgresql
+  972  firewall-cmd --get-default-zone
+  973  firewall-cmd --get-active-zones
+  974  firewall-cmd --list-all
+  975  firewall-cmd --permanent --zone=public --add-service=postgresql
+  976  firewall-cmd reload
+  977  sudo firewall-cmd reload
+  978  su
+  979  systemctl restart firewalld.service
+  980  su postgres
+  981  su -i -u postgres
+  982  sudo -i -u postgres
+  983  exitg
+  984  exit
+  985  dhclient p4p2
+  986  ifconfig
+  987  dhclient p4p2
+  988  ifconfig
+  989  dhclient p4p2
+  990  ifconfig
+  991  exit
+  992  startx
+  993  ifconfig
+  994  dhclientp4p2
+  995  dhclient p4p2
+  996  reboot
+  997  ifconfig
+  998  dhclient p4p2
+  999  sudo dhclient p4p2
+ 1000  ifconfig
+ 1001  sudo yum search docker
+ 1002  sudo yum install docker
+ 1003  systemctl status docker
+ 1004* systemctl start dockers
+ 1005  systemctl status docker
+ 1006  sudo docker search postgres
+ 1007  sudo docker run  postgres
+ 1008  history
+ 1009  history > commands_08_03_17.txt 
