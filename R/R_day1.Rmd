@@ -1,0 +1,35 @@
+---
+title: "R_programming_01"
+author: "Jorge Raze"
+date: "9/4/2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Programming
+
+This is the R programming course, we'll try to focus in common tasks performed by a data scientist.
+
+## What is R?
+
+R is a dialect of S.
+
+S is a language that was developed by John Chambers and others at the old Bell Telephone Laboratories, originally part of AT&T Corp. S was initiated in 1976 as an internal statistical analysis environment, originally implemented as Fortran libraries. Early versiones of the language did not even contain functions for statistical modeling.
+
+In 1988 the system was rewritten in C and began to resemble the system that we have today (this was Version 3 of the language). The book *Statistical Models in S* by Chambers and Hastie (the white book) documents the statistical analysis functionality.Version 4 of the S language was released in 1988 and is the version that we use today. The book *Programming with Data* by john Chambers (the green book) documents this version of the language.
+
+## Back to R
+
+The R language came to use quite a bit after S had been deeloped. One key limitation of the S language was that it was only available in a commercial package, S-PLUS. In 1991, R was created by Ross Ihaka and Robert Gentleman in the Department of Statistics at the University of Auckland. In 1993 the first announcment of R was made to the public. Ross's and Robert's experience developing R is documented in a 1996 paper in the *Journal of Computational and Graphical Statistics*
+
+> Ross Ihaka and Robert Gentleman. R: A language for data analysis and grapics. Jorual of Computational and Graphical Statistics, 5(3):299-314,1996
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
