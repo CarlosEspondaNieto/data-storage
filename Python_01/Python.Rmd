@@ -32,6 +32,13 @@ Python features a dynamic type system and automatic memory management and suppor
 
 I like to use SublimeText3 with Anaconda pluggin
 
+## Before we get to the code
+
+1. Programs are composed of modules
+2. Modules contains statements
+3. Statements contains expressions
+4. Expressions create and process objects
+
 ## The Zen of Python
 
 ```
@@ -110,6 +117,17 @@ One exception to the **first line** rule is when the source code starts with a U
 #!/usr/bin/env python3
 # -*- coding: cp-1252 -*-
 ```
+
+## Python Data Types
+
+* Numbers
+* Strings
+* Lists
+* Dictionaries
+* Tuples
+* Files
+* Sets (deprecated since 2.6)
+* Other core types (Booleans, Types, None)
 
 ## An informal Introduction to Python
 
@@ -206,7 +224,7 @@ Besides numbers, Python can also manipulate strings, which can be expressed in s
 '"Yes", he said'
 ```
 
-Long strings:
+## Long strings:
 
 ```
 print("""\
@@ -216,7 +234,7 @@ Usage: thingy [OPTIONS]
 """)
 ```
 
-Strings can be glued together with the `+` operator and repeated with `*`:
+## Strings can be glued together with the `+` operator and repeated with `*`:
 
 ```
 3 * 'omn' + 'ium'
@@ -241,12 +259,14 @@ In that case, you use the `+` operator
 prefix + 'thon'
 ```
 
-If you need to break long strings:
+## If you need to break long strings:
 
 ```
 text = ('This is a reaaaaaaaaaaaaaaaally long string, '
         'so I need to break it some way')
 ```
+
+## String Indices
 
 Strings can be indexed(subscripted), with the first character having index 0, There is no separate character type; a character is simply a string of size one:
 
@@ -288,6 +308,8 @@ word[4:] # characters from position 4 (included) to the end
 word[-2:] # characters from the second-last (included) to the end
 ```
 
+## Strings are immutable in Python
+
 Python strings cannot be changed, they are immutable. Therefore, assigning to an indexed position in the string results in an error:
 
 If you need a different string, you should create a new one:
@@ -305,6 +327,45 @@ len(s)
 12
 ```
 
+## Some other String methods
+
+```
+s = 'spam'
+s.find('pa')
+s.replace('pa', 'XYZ')
+line = 'aaa,bbb,ccc'
+line.split(',')
+s = 'spam'
+s.upper()
+s.isalpha() # Check if is alphanumeric, another examples: isdigit
+line = 'aaa,bbb,ccccc,dd\n' 
+line.rstrip() # remove car turn
+line.rstrip().split(',') # combining the two methods
+```
+
+## Formatting expression
+
+```
+'%s, eggs, and %s' % ('spam', 'SPAM!') # all versions
+'{0}, eggs, and {1}'.format('spam', 'SPAM!') # 2.6+, 3.0+
+'{}, eggs, and {}'.format('spam', 'SPAM!') # 2.7+, 3.1+
+```
+
+More formating
+
+```
+'{:,}'.format(296999.2567)
+'{:,.2f}'.format(296999.2567)
+```
+
+## There's a ton of methods
+
+But we will not cover them all
+
+```
+dir(s)
+```
+
 ## Lists
 
 Lists in python can be written as a simple comma separated values inside square brackets. Lists might contain items of different types, but usually the items all have the same type.
@@ -313,6 +374,8 @@ Lists in python can be written as a simple comma separated values inside square 
 squares = [1, 4, 9, 16, 25]
 squares
 ```
+
+## Indices and slices
 
 Like strings (and all other built-in sequence type), lists can be indexed and sliced:
 
@@ -328,6 +391,8 @@ All slice operations return a new list containing the requested elements. This m
 squares[:]
 ```
 
+## Other operations
+
 Lists also support operations like concatenation:
 
 ```
@@ -342,11 +407,15 @@ cubes[3] = 4 ** 3
 cubes
 ```
 
+## Changing lists
+
 You can also add new items at the end of the list, by using the `append()` method:
 
 ```
 cubes.append(216)
 cubes.append(7 ** 3)
+cubes
+cubes.pop(1)
 cubes
 ```
 
@@ -363,12 +432,23 @@ letters[:] # clear the list
 letters
 ```
 
+## Built-in functions
+
 The built-in function also applies to lists:
 
 ```
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 len(letters)
 ```
+Other examples
+
+```
+m = ['bb', 'aa', 'cc']
+m.sort() # Here we're actually sorting the original list
+m.reverse() # Here as well
+```
+
+## Nesting
 
 It is possible to nest list (create lists containing other lists), for example:
 
@@ -384,6 +464,94 @@ x
 ```
 fibonacci.py
 ```
+
+## Dictionaries
+
+Python dictionaries are something completely different, they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position.
+
+```
+my_dict = {'name': 'Jorge', 'age': 17, 'is_alive': True}
+my_dict['name']
+my_dict['age'] += 1
+```
+
+## More on dicts
+
+```
+new_dict = {}
+new_dict['name'] = 'Jim'
+new_dict['job'] = 'singer'
+new_dict['age'] = 27
+new_dict
+```
+
+Another way to do this
+
+```
+another_dict = dict(name='Jim', job='singer', age=27)
+```
+
+## Nesting
+
+```
+rec = {
+	'name': {
+	    'first': 'Jim',
+	    'last': 'Morrison',
+	    'nick': 'The Lizard King'
+    },
+	'jobs': ['singer', 'poet'],
+	'age': 27
+}
+rec['name']['last']
+rec['jobs']
+rec['jobs'][-1]
+rec['jobs'].append('writter')
+rec
+```
+
+## Accessing Keys
+
+```
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+my_dict.keys()
+keys = list(my_dict.keys()) # unsorted keys list
+keys.sort()
+items = my_dict.items()
+items
+```
+
+## Tuples
+
+The tuple object is roughly like a list that cannot be changed. tuples are sequences, like lists, but they are immutable, like strings. Functionallly, they0re used to represent fixed collections if items: the components of a specific calendar date, for instance.
+
+```
+tuple = (1, 2, 3, 4)
+len(tuple)
+tuple + (5, 6) # concatenation
+tuple[0] # Indexing, slicing, and more
+tuple.index(4) # get the index for a given value
+tuple.count(2) # 2 appears once
+tuple[2] = 34 # tuples are immutable
+tuple[5] = 45 # I said immutable
+```
+
+## Why tuples?
+
+Basically tuples are immutable lists, that's the main point, you can use lists or tuples but the list will be possible to change it. So itpplies in some other cases.
+
+## Files
+
+File objects are Python code's main interface to external files on your computer. They can be used to read and write text memos, audo clips, Excel document
+s, saved email messages, and whatever else you happen to have stored in your machine.
+
+```
+f = open('data.txt', 'w') # make a new file in output mode ('w' is write)
+f.write('Hello\n') # write strings of characters to it
+f.write('world\n') # return number of items written in Python 3.X
+f.close() # close to flush output buffers to disk
+```
+
 
 # Control Flow
 
@@ -459,4 +627,10 @@ list(range(5))
 
 The break statement, like in C, breaks out of the smallest enclosing `for` or `while` loop.
 
+
+```
+for_else.py
+```
+
+Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.
 

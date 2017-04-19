@@ -43,6 +43,15 @@ Jorge Alcaraz
 </ul>
 <p>I like to use SublimeText3 with Anaconda pluggin</p>
 </div>
+<div id="before-we-get-to-the-code" class="slide section level2">
+<h1>Before we get to the code</h1>
+<ol style="list-style-type: decimal">
+<li>Programs are composed of modules</li>
+<li>Modules contains statements</li>
+<li>Statements contains expressions</li>
+<li>Expressions create and process objects</li>
+</ol>
+</div>
 <div id="the-zen-of-python" class="slide section level2">
 <h1>The Zen of Python</h1>
 <pre><code>import this</code></pre>
@@ -101,6 +110,19 @@ Jorge Alcaraz
 <p>One exception to the <strong>first line</strong> rule is when the source code starts with a UNIX “shebang” line. In this case, the encoding should be added as the second line of the file. For example:</p>
 <pre><code>#!/usr/bin/env python3
 # -*- coding: cp-1252 -*-</code></pre>
+</div>
+<div id="python-data-types" class="slide section level2">
+<h1>Python Data Types</h1>
+<ul>
+<li>Numbers</li>
+<li>Strings</li>
+<li>Lists</li>
+<li>Dictionaries</li>
+<li>Tuples</li>
+<li>Files</li>
+<li>Sets (deprecated since 2.6)</li>
+<li>Other core types (Booleans, Types, None)</li>
+</ul>
 </div>
 <div id="an-informal-introduction-to-python" class="slide section level2">
 <h1>An informal Introduction to Python</h1>
@@ -165,13 +187,17 @@ NameError: name 'n' is not defined</code></pre>
 'doesn\'t' # use \' to escape the single quote
 &quot;doesn't&quot; # or use double quotes instead
 '&quot;Yes&quot;, he said'</code></pre>
-<p>Long strings:</p>
+</div>
+<div id="long-strings" class="slide section level2">
+<h1>Long strings:</h1>
 <pre><code>print(&quot;&quot;&quot;\
 Usage: thingy [OPTIONS]
       -h            Displays this message
       -H hostname   Hostname to connect to
 &quot;&quot;&quot;)</code></pre>
-<p>Strings can be glued together with the <code>+</code> operator and repeated with <code>*</code>:</p>
+</div>
+<div id="strings-can-be-glued-together-with-the-operator-and-repeated-with" class="slide section level2">
+<h1>Strings can be glued together with the <code>+</code> operator and repeated with <code>*</code>:</h1>
 <pre><code>3 * 'omn' + 'ium'</code></pre>
 <p>Two or more string literals (the ones enclosed between quotes) next to each other are concatenated automatically:</p>
 <pre><code>'Py' 'thon'</code></pre>
@@ -180,9 +206,14 @@ Usage: thingy [OPTIONS]
 prefix = 'thon' # can't concatenate a variable and a string literal</code></pre>
 <p>In that case, you use the <code>+</code> operator</p>
 <pre><code>prefix + 'thon'</code></pre>
-<p>If you need to break long strings:</p>
+</div>
+<div id="if-you-need-to-break-long-strings" class="slide section level2">
+<h1>If you need to break long strings:</h1>
 <pre><code>text = ('This is a reaaaaaaaaaaaaaaaally long string, '
         'so I need to break it some way')</code></pre>
+</div>
+<div id="string-indices" class="slide section level2">
+<h1>String Indices</h1>
 <p>Strings can be indexed(subscripted), with the first character having index 0, There is no separate character type; a character is simply a string of size one:</p>
 <pre><code>word = 'Python'
 word[0]
@@ -202,6 +233,9 @@ word[:2] + word[4:]</code></pre>
 <pre><code>word[:2] # character from the beginning to position 2 (excluded)
 word[4:] # characters from position 4 (included) to the end
 word[-2:] # characters from the second-last (included) to the end</code></pre>
+</div>
+<div id="strings-are-immutable-in-python" class="slide section level2">
+<h1>Strings are immutable in Python</h1>
 <p>Python strings cannot be changed, they are immutable. Therefore, assigning to an indexed position in the string results in an error:</p>
 <p>If you need a different string, you should create a new one:</p>
 <pre><code>'J' + word[1:]
@@ -211,26 +245,65 @@ word[:2] + py</code></pre>
 len(s)
 12</code></pre>
 </div>
+<div id="some-other-string-methods" class="slide section level2">
+<h1>Some other String methods</h1>
+<pre><code>s = 'spam'
+s.find('pa')
+s.replace('pa', 'XYZ')
+line = 'aaa,bbb,ccc'
+line.split(',')
+s = 'spam'
+s.upper()
+s.isalpha() # Check if is alphanumeric, another examples: isdigit
+line = 'aaa,bbb,ccccc,dd\n' 
+line.rstrip() # remove car turn
+line.rstrip().split(',') # combining the two methods</code></pre>
+</div>
+<div id="formatting-expression" class="slide section level2">
+<h1>Formatting expression</h1>
+<pre><code>'%s, eggs, and %s' % ('spam', 'SPAM!') # all versions
+'{0}, eggs, and {1}'.format('spam', 'SPAM!') # 2.6+, 3.0+
+'{}, eggs, and {}'.format('spam', 'SPAM!') # 2.7+, 3.1+</code></pre>
+<p>More formating</p>
+<pre><code>'{:,}'.format(296999.2567)
+'{:,.2f}'.format(296999.2567)</code></pre>
+</div>
+<div id="theres-a-ton-of-methods" class="slide section level2">
+<h1>There’s a ton of methods</h1>
+<p>But we will not cover them all</p>
+<pre><code>dir(s)</code></pre>
+</div>
 <div id="lists" class="slide section level2">
 <h1>Lists</h1>
 <p>Lists in python can be written as a simple comma separated values inside square brackets. Lists might contain items of different types, but usually the items all have the same type.</p>
 <pre><code>squares = [1, 4, 9, 16, 25]
 squares</code></pre>
+</div>
+<div id="indices-and-slices" class="slide section level2">
+<h1>Indices and slices</h1>
 <p>Like strings (and all other built-in sequence type), lists can be indexed and sliced:</p>
 <pre><code>squares[0] # indexing returns the item
 squares[-1]
 squares[-3:] # slicing returns a new list</code></pre>
 <p>All slice operations return a new list containing the requested elements. This means that the following slice returns a new copy of the list:</p>
 <pre><code>squares[:]</code></pre>
+</div>
+<div id="other-operations" class="slide section level2">
+<h1>Other operations</h1>
 <p>Lists also support operations like concatenation:</p>
 <pre><code>squares + [36, 49, 64, 81, 100]</code></pre>
 <p>Unlike strings, which are immutable, lists are a mutable type, i.e. it is possible to change their content:</p>
 <pre><code>cubes = [1, 8, 27, 65, 125]  # something's wrong here
 cubes[3] = 4 ** 3
 cubes</code></pre>
+</div>
+<div id="changing-lists" class="slide section level2">
+<h1>Changing lists</h1>
 <p>You can also add new items at the end of the list, by using the <code>append()</code> method:</p>
 <pre><code>cubes.append(216)
 cubes.append(7 ** 3)
+cubes
+cubes.pop(1)
 cubes</code></pre>
 <p>Assignment slices is also possible, and this can even change the size of the list or clear ir entirely:</p>
 <pre><code>letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -241,9 +314,19 @@ letters[2:5] = [] # now remove them
 letters
 letters[:] # clear the list
 letters</code></pre>
+</div>
+<div id="built-in-functions" class="slide section level2">
+<h1>Built-in functions</h1>
 <p>The built-in function also applies to lists:</p>
 <pre><code>letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 len(letters)</code></pre>
+<p>Other examples</p>
+<pre><code>m = ['bb', 'aa', 'cc']
+m.sort() # Here we're actually sorting the original list
+m.reverse() # Here as well</code></pre>
+</div>
+<div id="nesting" class="slide section level2">
+<h1>Nesting</h1>
 <p>It is possible to nest list (create lists containing other lists), for example:</p>
 <pre><code>a = ['a', 'b', 'c']
 n = [1, 2, 3]
@@ -254,8 +337,114 @@ x</code></pre>
 <h1>Something more complex</h1>
 <pre><code>fibonacci.py</code></pre>
 </div>
+<div id="dictionaries" class="slide section level2">
+<h1>Dictionaries</h1>
+<p>Python dictionaries are something completely different, they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position.</p>
+<pre><code>my_dict = {'name': 'Jorge', 'age': 17, 'is_alive': True}
+my_dict['name']
+my_dict['age'] += 1</code></pre>
+</div>
+<div id="more-on-dicts" class="slide section level2">
+<h1>More on dicts</h1>
+<pre><code>new_dict = {}
+new_dict['name'] = 'Jim'
+new_dict['job'] = 'singer'
+new_dict['age'] = 27
+new_dict</code></pre>
+<p>Another way to do this</p>
+<pre><code>another_dict = dict(name='Jim', job='singer', age=27)</code></pre>
+</div>
+<div id="nesting-1" class="slide section level2">
+<h1>Nesting</h1>
+<pre><code>rec = {
+    'name': {
+        'first': 'Jim',
+        'last': 'Morrison',
+        'nick': 'The Lizard King'
+    },
+    'jobs': ['singer', 'poet'],
+    'age': 27
+}
+rec['name']['last']
+rec['jobs']
+rec['jobs'][-1]
+rec['jobs'].append('writter')
+rec</code></pre>
+</div>
+<div id="accessing-keys" class="slide section level2">
+<h1>Accessing Keys</h1>
+<pre><code>my_dict = {'a': 1, 'b': 2, 'c': 3}
+my_dict.keys()
+keys = list(my_dict.keys()) # unsorted keys list
+keys.sort()
+items = my_dict.items()
+items</code></pre>
+</div>
+<div id="tuples" class="slide section level2">
+<h1>Tuples</h1>
+<p>The tuple object is roughly like a list that cannot be changed. tuples are sequences, like lists, but they are immutable, like strings. Functionallly, they0re used to represent fixed collections if items: the components of a specific calendar date, for instance.</p>
+<pre><code>tuple = (1, 2, 3, 4)
+len(tuple)
+tuple + (5, 6) # concatenation
+tuple[0] # Indexing, slicing, and more
+tuple.index(4) # get the index for a given value
+tuple.count(2) # 2 appears once
+tuple[2] = 34 # tuples are immutable
+tuple[5] = 45 # I said immutable</code></pre>
+</div>
+<div id="why-tuples" class="slide section level2">
+<h1>Why tuples?</h1>
+<p>Basically tuples are immutable lists, that’s the main point, you can use lists or tuples but the list will be possible to change it. So itpplies in some other cases.</p>
+</div>
+<div id="files" class="slide section level2">
+<h1>Files</h1>
+<p>File objects are Python code’s main interface to external files on your computer. They can be used to read and write text memos, audo clips, Excel document s, saved email messages, and whatever else you happen to have stored in your machine.</p>
+<pre><code>f = open('data.txt', 'w') # make a new file in output mode ('w' is write)
+f.write('Hello\n') # write strings of characters to it
+f.write('world\n') # return number of items written in Python 3.X
+f.close() # close to flush output buffers to disk</code></pre>
+</div>
 <div id="control-flow" class="titleslide slide section level1"><h1>Control Flow</h1></div><div id="if-statements" class="slide section level2">
 <h1>If Statements</h1>
+<p>The most well known statement type is the <code>if</code> statement. For example:</p>
+<pre><code>if_statement.py</code></pre>
+<p>There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if … elif … elif … sequence is a substitute for the switch or case statements found in other languages.</p>
+</div><div id="for-statements" class="slide section level2">
+<h1>For Statements</h1>
+<p>The <code>for</code> statement in python differs a bit from whhat you used in C or Pascal. Rather than always iterating over an arithmetic progression of numbers, or giving the user the ability to define both the iteration step and halting condition (as C), Python’s <code>for</code> statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example:</p>
+<pre><code>words = ['cat', 'window', 'defenestrate']
+for w in words:
+  print(w, len(w))</code></pre>
+<p>If you need to modify the sequence you are iterating over whie inside the loop (for example to duplicate selected items), it is recommended that you first make a copy. Iterating over a sequence does not implicitly make a copy. The slice notation makes this especially convenient:</p>
+<pre><code>for w in words[:]:
+  if len(w) &gt; 6:
+    words.insert(0, w)</code></pre>
+</div><div id="the-range-function" class="slide section level2">
+<h1>The range function</h1>
+<p>If you do need to iterate over a sequence of numbers, the built-in function <code>range()</code> comes in handy. It generates arithmetic progressions:</p>
+<pre><code>for i in range(5):
+  print(i)</code></pre>
+<ul>
+<li>The given end point is never part of the sequence</li>
+<li>You can also indicate the start</li>
+<li>You can specify a different increment (even negative; sometimes this is called ‘step’)</li>
+</ul>
+<pre><code>range(5, 10)
+range(0, 10, 3)
+range(-10, -100, -30)</code></pre>
+<p>To iterate over the indices of a sequence, you can combine range() and len() as follows:</p>
+<pre><code>a = ['Mary', 'had', 'a', 'little', 'lamb']
+for i in range(len(a)):
+  print(i, a[i])</code></pre>
+<p>A strange thing happen if you print a range()</p>
+<pre><code>print(range(5))</code></pre>
+<p>We say such object is <strong>iterable</strong>, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted. We have seen that the <code>for</code> statement is such a <strong>iterator</strong>. The function <code>list()</code> is another; is creates lists from <strong>iterables</strong>:</p>
+<pre><code>list(range(5))</code></pre>
+</div><div id="break-and-continue-statements-and-else-clauses-on-loops" class="slide section level2">
+<h1><code>break</code> and <code>continue</code> Statements, and <code>else</code> Clauses on Loops</h1>
+<p>The break statement, like in C, breaks out of the smallest enclosing <code>for</code> or <code>while</code> loop.</p>
+<pre><code>for_else.py</code></pre>
+<p>Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
