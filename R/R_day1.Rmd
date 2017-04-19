@@ -80,3 +80,182 @@ As far as getting started with R by reading stuff, there is a course book also a
 
 - [An Introduction to R](cran.r-project.org/doc/manuals/r-release/R-intro.html)
 
+
+## Installation
+
+On ubuntu
+```
+sudo echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install r-base r-base-dev
+```
+On CentOS
+
+```
+adduser graduate
+passwd graduate
+usermod -aF wheel graduate
+sudo yum install epel-release
+sudo yum install R
+wget https://download2.rstudio.org/rstudio-server-rhel-1.0.44-x86_64.rpm
+sudo yum install --nogpgcheck rstudio-server-rhel-1.0.44-x86_64.rpm
+systemctl status rstudio-server.service
+```
+Then visit http://youriporhostname:8787/
+
+## Getting started
+
+```{r echo=TRUE}
+x <- 1
+print(x)
+msg <- "Hello"
+```
+
+## Evaluation
+
+When a complete expression is entered at the prompt, it is evaluated and te result of the evaluated expression is returned.
+
+```{r echo = T}
+x <- 5 ## nothing printed
+x ## auto printing occurs
+print(x) ## explicit printing
+```
+
+## R Objects
+
+R has five basic or "atomic" classes or objects:
+
+* character
+* numeric (real numbers)
+* integer
+* complex
+* logical (True/False)
+
+The most basic type of R object is a vector. Empty vectors can be created with the `vector()` function. *A vector can only contain objects of the same class.*
+
+The only exception to that rule is a **list**.
+
+## Numbers
+
+Numbers are treated as numeric objects (double precision real numbers).
+
+If you explicitly want an integer, you need to specify the `L` suffix. Ex. `1L`
+
+There is also a spceical number `Inf` which represents infinity. Ex. `1/0`
+
+The value `NaN` represents an undefined value ("not a number") Ex. `0/0`
+
+## Attributes
+
+R objects can contain attirbutes, which are like metadata for the object. For example collumn names on a data frame, other examples are:
+
+* names, dimnames
+* dimensions (e.g. matrices, arrays)
+* class (e.g. integer, numeric)
+* length
+* other user-defined attirbutes/metadata
+
+You can access them with the `attribuutes()` function.
+
+## Creating vectors
+
+The `c()` function can be used to create a vector object. It concatenates things together.
+
+```{r echo=TRUE}
+x <- c(0.5, 0.6) # numeric
+x <- c(TRUE, FALSE) # logical
+x <- c(T, F) # logical
+x <- c("a", "b", "c") # character
+x <- 9:29 # integer
+x <- c(1+0i, 2+4i) # complex
+```
+
+You can also use the `vector()` function to initialize vectors.
+
+```{r echo=TRUE}
+x <- vector("numeric", length=10)
+x
+```
+
+
+## Mixing Objects
+
+You can mix objects in a vector.
+
+```{r echo=TRUE}
+y <- c(1.7, "a") # character
+y <- c(TRUE, 2) # numeric
+y <- c("a", TRUE) # character
+```
+
+In each of case above, we are mixing objects of two different classes in a vector. But remember, the only rule about vectors says this is not allowed. Whe ndifferent objects are mixed in a vector, coercion occurs so that every element in the vector is of the same class.
+
+## Explicit Coercion
+
+Objects can be explicitly coerced from one class to another using the as.* functions, if available.
+
+```{r echo=TRUE}
+x <- 0:6
+class(x)
+as.numeric(x)
+as.logical(x)
+as.character(x)
+```
+
+Sometimes, R can't figure out how to coerce an object and this can result in NAs being produced.
+
+```{r echo=TRUE}
+x <- c("a", "b", "c")
+as.numeric(x)
+as.logical(x)
+as.complex(x)
+```
+
+## Matrices
+
+Matrices are vectors with a **dimension** attribute. The dimension attribute is itself an integer vector of length 2 (rows x columns)
+
+```{r echo=TRUE}
+m <- matrix(nrow = 2, ncol = 3)
+m
+dim(m)
+attributes(m)
+```
+
+Matrices are constructed **column-wise**, so entries can be thought of starting in the "upper left" corner and running down the columns.
+
+```{r echo=TRUE}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+m
+```
+
+You can create a matrix from vectors by adding a dimension attribute.
+
+```{r echo=TRUE}
+m <- 1:10
+m
+dim(m) <- c(2,5)
+m
+```
+
+Matrices can be created by **column-binding** or **row-binding** with the `cbind()` and `rbind()` functions.
+
+```{r echo=TRUE}
+x <- 1:3
+y <- 10:12
+cbind(x, y)
+rbind(x, y)
+```
+
+## Lists
+
+Lists are a special type of vector that can contaian elements of different classes. Lists are very important data type in R and you should get to know them well. Lists, in a combination with the various "apply" functions discussed later, make for a powerful combination.
+
+You can create them with the `list()` function.
+
+```{r echo=TRUE}
+x <- list(1, "a", TRUE, 1+4i)
+x
+```

@@ -24,3 +24,28 @@ DC/OS is a distributed operating system based on the Apache Mesos distributed sy
 
 ![Architecture](images/architecture.png)
 
+## Features
+
+
+* High Resource Utilization
+* Mixed Workload Colocation
+* Container Orchestration
+* Extensible Resource Isolation
+* Stateful Storage Support
+* Package Management
+* Cloud-Agnostic Installer
+* Web and Command Line Interfaces
+* Elastic Scalability
+* High Availability
+* Zero Downtime Upgrades
+* Integration-Tested Components
+* Service Discovery and Distributed Load Balancing
+* Control & Management plane for Distributed Load Balancers
+* Cluster Perimeter Security
+* Identity & Access Management
+* External Identity Provider with LDAP, SAML & OpenID Connect
+* Cluster security with encrypted communication
+* Workload Isolation with Container level authorization
+* IP per Container with Extensible Virtual Networks (SDN)
+* Network Isolation of Virtual Network Subnets
+

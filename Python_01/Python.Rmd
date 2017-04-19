@@ -19,7 +19,8 @@ Python features a dynamic type system and automatic memory management and suppor
 
 ## Bibliography
 
-![Python For Data Science](images/python4da.jpeg)
+* https://docs.python.org/3/
+* http://python-guide-pt-br.readthedocs.io/en/latest/
 
 ## IDEs
 
@@ -29,13 +30,433 @@ Python features a dynamic type system and automatic memory management and suppor
 * Spyder
 * Komodo IDE
 
-* I like to use SublimeText3 with Anaconda
+I like to use SublimeText3 with Anaconda pluggin
 
-## Import conventions
+## The Zen of Python
 
-```{python, eval = FALSE}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 ```
+import this
+```
+
+## The State of Python (3 & 2)
+
+* Most production applications today use Python 2.7
+* Python 3 is ready for the production deployment of applications today
+* Python 2.7 will only receive necessary security updates until 2020
+* The brand name Python encapsuates both Python 3 and Python 2
+
+## Recommendations
+
+* Use python 3 for new Python applications
+* If you're learning python for the first time, familiarizing yourself with Python 2.7 will be very useful, but not more useful than learning python 3
+* Learn both. They are both python
+* Software that is already built often depends on Python 2.7
+
+## Implementations
+
+* CPython
+* Jython
+* PyPy
+* IronPython
+* PythonNet
+
+## Using the Python Interpreter 
+
+Your python interpreter is usually on `/usr/local/bin/python3.6` or `/usr/bin/python3.6`
+
+```
+$ python3.6
+```
+
+You can exit with the `quit()` function or hitting `Control-D`
+
+Another way of starting the interpreter is `python -c command [arg] ...` which executes the statement in **command** analogous to the shell's `-c` option.
+
+Some python modules are also helpful as scripts. These can be invoked using `python -m module [arg] ...`
+
+Example:
+
+```
+python -m SimpleHTTPServer 8000
+```
+
+[All details of the CLI](https://docs.python.org/3/using/cmdline.html#using-on-general)
+
+## Argument Passing
+
+When known to the interpreter, the script name and additional arguments thereafter are turned into a list of strings and assigned to the `argv` variable in the `sys` module. You can access this list by executing `import sys`.
+
+## The Interpreter and its Environment
+
+By default, Python source files are treated as encoded in UTF-8. In that encoding, characters of most languages in the world can be used simultaneously in string literals, identifiers and comments - although the standard library only uses ASCII characters for identifiers, a convention that any portable code should follow. To display all these characters properly, your editor must recognize that the file is UTF-8, and it must usse a font that supports all the characters in the file.
+
+To declare an encoding other than the default one, a special comment line should be added as the **first** line of the file. The syntax is as follows:
+
+```
+# -*- coding: encoding -*-
+```
+
+Where encoding is one of the valid [codecs](https://docs.python.org/3/library/codecs.html#module-codecs) supported by Python.
+
+For example
+
+```
+# -*- coding: utf-8 -*-
+```
+
+One exception to the **first line** rule is when the source code starts with a UNIX "shebang" line. In this case, the encoding should be added as the second line of the file. For example:
+
+```
+#!/usr/bin/env python3
+# -*- coding: cp-1252 -*-
+```
+
+## An informal Introduction to Python
+
+Comments
+
+```
+# This is the first comment
+spam = 1 # and this is the second comment
+         # and a third
+text = "# this is not a comment because it's inside quotes"
+```
+
+## Using Python as a Calculator
+
+Numbers
+
+Expression syntax is straightforward, the operators are the same as in the other languages: `+`, `-`, `/`, `*`, parentheses `(())` can be used for grouping.
+
+```
+>>> 2+2
+4
+>>> 50 - 5*6
+20
+>>> (50 - 5*6) / 4
+5.0
+>>> 8/5 # division always return a floating point number
+1.6
+```
+
+The integer numbers (e.g. 2, 4, 20) have type `int`, the ones with a fractional part (e.g. 5.0, 6.0) have type `float`.
+
+Division `/` always return a float. To do floor division and get an integer result (discarding fractional result) you can use the `//` operator; to calculate the remainder you can use the `%`:
+
+```
+>>> 17/3
+5.66666666667
+>>> 17//3
+5
+>>> 17%3
+2
+>>> 5 * 3 + 2
+17
+```
+
+With python, it is possible to use the `**` operator to calculate powers:
+
+```
+>>> 5 ** 2 # 5 squared
+25
+>>> 2 ** 7 # 2 to the power of 7
+128
+```
+
+The equal sign `=` is used to assign a value to a variable. Afterwards, no result is displayed before the next interactive prompt:
+
+```
+>>> width = 20
+>>> width = 5 * 9
+>>> width * height
+900
+```
+If a variable is not "defined", trying to use will give a error:
+
+```
+>>> n 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'n' is not defined
+```
+
+In interactive mode, the last printed expression is assigned to the variable `_`. This means that when you are using python as a desk calculator, it is somewhat easier to continue calculations, for example:
+
+```
+>>> tax = 12.5 / 100
+>>> price = 100.50
+>>> price * tax
+12.5625
+>>> price + _
+113.0625
+>>> round(_, 2)
+113.06
+```
+
+In addition to `int` and `float`, python supports other types of numbers, such as `Decimal` and `Fraction`. Python also has built-in support for complex numbers, and uses the `j` or `J` suffix to indicate the imaginary part (e.g. `3+5j`).
+
+## Strings
+
+Besides numbers, Python can also manipulate strings, which can be expressed in several ways. They can be enclosed in single quotes or double quotes with the same result. You can use `\` to escape quotes:
+
+```
+'spam eggs' # single quotes
+'doesn\'t' # use \' to escape the single quote
+"doesn't" # or use double quotes instead
+'"Yes", he said'
+```
+
+Long strings:
+
+```
+print("""\
+Usage: thingy [OPTIONS]
+      -h            Displays this message
+      -H hostname   Hostname to connect to
+""")
+```
+
+Strings can be glued together with the `+` operator and repeated with `*`:
+
+```
+3 * 'omn' + 'ium'
+```
+
+Two or more string literals (the ones enclosed between quotes) next to each other are concatenated automatically:
+
+```
+'Py' 'thon'
+```
+
+This only works with two literals though, not with variables or expressions:
+
+```
+prefix = 'Py'
+prefix = 'thon' # can't concatenate a variable and a string literal
+```
+
+In that case, you use the `+` operator
+
+```
+prefix + 'thon'
+```
+
+If you need to break long strings:
+
+```
+text = ('This is a reaaaaaaaaaaaaaaaally long string, '
+        'so I need to break it some way')
+```
+
+Strings can be indexed(subscripted), with the first character having index 0, There is no separate character type; a character is simply a string of size one:
+
+```
+word = 'Python'
+word[0]
+word[5]
+```
+
+Indices may also be negative numbers, to start counting from the right:
+
+```
+word[-1] # last character
+word[-2] # second-last character
+word[-6]
+```
+
+Note that since -0 is the same as 0, negative indices start from -1
+
+In addition to indexing, slicing is also supportes. While indexing is used to obtain individual characters, slicing allows you to obtain substring:
+
+```
+word[0:2] # characters from position 0 (included) to 2 (excluded)
+word[2:5] # characters from position 2 (included) to 5 (excluded)
+```
+
+Note how the start is always included, and the end always excluded. This makes sure that s[:i] + s[i:] is always equal to s:
+
+```
+word[:2] + word[2:]
+word[:2] + word[4:]
+```
+
+Slice indices have useful defaults; an omitted first index defaults to zero, an omitted second index defaults to the size of the string being sliced.
+
+```
+word[:2] # character from the beginning to position 2 (excluded)
+word[4:] # characters from position 4 (included) to the end
+word[-2:] # characters from the second-last (included) to the end
+```
+
+Python strings cannot be changed, they are immutable. Therefore, assigning to an indexed position in the string results in an error:
+
+If you need a different string, you should create a new one:
+
+```
+'J' + word[1:]
+word[:2] + py
+```
+
+The built in function `len()` returns the length of a string:
+
+```
+s = 'tibiritabara'
+len(s)
+12
+```
+
+## Lists
+
+Lists in python can be written as a simple comma separated values inside square brackets. Lists might contain items of different types, but usually the items all have the same type.
+
+```
+squares = [1, 4, 9, 16, 25]
+squares
+```
+
+Like strings (and all other built-in sequence type), lists can be indexed and sliced:
+
+```
+squares[0] # indexing returns the item
+squares[-1]
+squares[-3:] # slicing returns a new list
+```
+
+All slice operations return a new list containing the requested elements. This means that the following slice returns a new copy of the list:
+
+```
+squares[:]
+```
+
+Lists also support operations like concatenation:
+
+```
+squares + [36, 49, 64, 81, 100]
+```
+
+Unlike strings, which are immutable, lists are a mutable type, i.e. it is possible to change their content:
+
+```
+cubes = [1, 8, 27, 65, 125]  # something's wrong here
+cubes[3] = 4 ** 3
+cubes
+```
+
+You can also add new items at the end of the list, by using the `append()` method:
+
+```
+cubes.append(216)
+cubes.append(7 ** 3)
+cubes
+```
+
+Assignment slices is also possible, and this can even change the size of the list or clear ir entirely:
+
+```
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+letters
+letters[2:5] = ['C', 'D', 'E'] # replace some values
+letters
+letters[2:5] = [] # now remove them
+letters
+letters[:] # clear the list
+letters
+```
+
+The built-in function also applies to lists:
+
+```
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+len(letters)
+```
+
+It is possible to nest list (create lists containing other lists), for example:
+
+```
+a = ['a', 'b', 'c']
+n = [1, 2, 3]
+x = [a, n]
+x
+```
+
+## Something more complex
+
+```
+fibonacci.py
+```
+
+# Control Flow
+
+## If Statements
+
+The most well known statement type is the `if` statement. For example:
+
+```
+if_statement.py
+```
+
+There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
+
+
+## For Statements
+
+The `for` statement in python differs a bit from whhat you used in C or Pascal. Rather than always iterating over an arithmetic progression of numbers, or giving the user the ability to define both the iteration step and halting condition (as C), Python's `for` statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example:
+
+```
+words = ['cat', 'window', 'defenestrate']
+for w in words:
+  print(w, len(w))
+```
+
+If you need to modify the sequence you are iterating over whie inside the loop (for example to duplicate selected items), it is recommended that you first make a copy. Iterating over a sequence does not implicitly make a copy. The slice notation makes this especially convenient:
+
+```
+for w in words[:]:
+  if len(w) > 6:
+    words.insert(0, w)
+```
+
+## The range function
+
+If you do need to iterate over a sequence of numbers, the built-in function `range()` comes in handy. It generates arithmetic progressions:
+
+```
+for i in range(5):
+  print(i)
+```
+
+* The given end point is never part of the sequence
+* You can also indicate the start
+* You can specify a different increment (even negative; sometimes this is called 'step')
+
+```
+range(5, 10)
+range(0, 10, 3)
+range(-10, -100, -30)
+```
+
+To iterate over the indices of a sequence, you can combine range() and len() as follows:
+
+```
+a = ['Mary', 'had', 'a', 'little', 'lamb']
+for i in range(len(a)):
+  print(i, a[i])
+```
+
+A strange thing happen if you print a range()
+
+```
+print(range(5))
+```
+
+We say such object is **iterable**, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted. We have seen that the `for` statement is such a **iterator**. The function `list()` is another; is creates lists from **iterables**:
+
+```
+list(range(5))
+```
+
+## `break` and `continue` Statements, and `else` Clauses on Loops
+
+The break statement, like in C, breaks out of the smallest enclosing `for` or `while` loop.
+
 
