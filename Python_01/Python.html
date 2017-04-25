@@ -445,6 +445,121 @@ for i in range(len(a)):
 <p>The break statement, like in C, breaks out of the smallest enclosing <code>for</code> or <code>while</code> loop.</p>
 <pre><code>for_else.py</code></pre>
 <p>Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.</p>
+<p>The continue statement, also borrowed from C, continues with the next iteration of the loop:</p>
+<pre><code>continue.py</code></pre>
+</div><div id="the-pass-statements" class="slide section level2">
+<h1>The pass Statements</h1>
+<p>The pass statement does nothing. It can be used when a statement is required sintatically but the program requires no action, For example:</p>
+<pre><code>while True:
+  pass ## Busy wait for keyboard interrupt (Ctrl+C)</code></pre>
+<p>Or for creating minimal classes:</p>
+<pre><code>class MyEmptyClass:
+  pass</code></pre>
+<p>In a work in progress:</p>
+<pre><code>def initlog(*args):
+  pass</code></pre>
+</div><div id="the-while-statement" class="slide section level2">
+<h1>The while statement</h1>
+<p>The while statement is used for repeated execution as long as an expression is true:</p>
+<pre><code>count = 0
+while (count &lt; 10):
+  print(&quot;The count is %d&quot; % count)
+  count = count + 1
+
+print(&quot;Good bye&quot;)
+</code></pre>
+</div><div id="defining-functions" class="slide section level2">
+<h1>Defining functions</h1>
+<pre><code>ejemplo.py</code></pre>
+</div><div id="classes" class="slide section level2">
+<h1>Classes</h1>
+<pre><code>number.py</code></pre>
+</div><div id="generators" class="slide section level2">
+<h1>Generators</h1>
+<p>First lets understand iterators. According to Wikipedia, an iterator is an object that enables a programmer to traverse a container, particularly lists. However, an iterator performs traversal and gives access to data elements in a container, but does not perform iteration. You might be confused so lets take it a bit slow. There are three parts namely:</p>
+<ul>
+<li>Iterable</li>
+<li>Iterator</li>
+<li>Iteration</li>
+</ul>
+</div><div id="iterable" class="slide section level2">
+<h1>Iterable</h1>
+<p>An <code>iterable</code> in Python is any object which has an <code>__iter__</code> or a <code>__getitem__</code> method defined which returns an <em>iterator</em> or can take indexes.</p>
+<p>In a short, an <code>iterable</code> is any object which can provide us with an <em>iterator</em>.</p>
+<p>Iter…what?</p>
+</div><div id="iterator" class="slide section level2">
+<h1>Iterator</h1>
+<p>An iterator is any object in Python which has a <code>next</code> (Python2) or <code>__next__</code> method defined. That’s it. That’s an iterator. Now let’s understand iteration.</p>
+</div><div id="iteration" class="slide section level2">
+<h1>Iteration</h1>
+<p>In simple words it is the process of taking an item from something e.g a list. When we use a loop to loop over something it is called iteration. It is the name given to the process itself. Now as we have a basic understanding of these terms let’s understand generators.</p>
+</div><div id="generators-1" class="slide section level2">
+<h1>Generators</h1>
+<p>Generators functions allow you to declare a function that behaves like an iterator, i.e. it can be used in a for loop.</p>
+<p>A generator is something that you can iterate over (for us, usually using for ) but whose values are produced only as needed (lazily).</p>
+<pre><code># A dummy example
+
+def generator_function():
+    for i in range(10):
+        yield i
+for i in generator_function():
+    print(i)</code></pre>
+<p>It is not really useful in this case. Generators are best for calculating large sets of results (particularly calculations involving loops themselves) where you don’t want to allocate the memory for all results at the same time. Many Standard Library functions that return lists in Python 2 have been modified to return generators in Python 3 because generators require fewer resources.</p>
+<pre><code>fibonacci_gen.py</code></pre>
+<p>Anoother way to use a generator function is by callling the built in function <code>next()</code></p>
+</div><div id="lambdas" class="slide section level2">
+<h1>Lambdas</h1>
+<p>Lambda is a tool for building functions, or more precisely, for building function objects. That means that Python has two tools for building functions: def and lambda.</p>
+<p>Blueprint</p>
+<pre><code>lambda argument: manipulate(argument)</code></pre>
+<p>Normal function definition:</p>
+<pre><code>def square_root(x): return math.sqrt(x)</code></pre>
+<p>The same function as a lambda:</p>
+<pre><code>square_root = lambda x: math.sqrt(x)</code></pre>
+<p>Another example</p>
+<pre><code>def add(x, y): return x + y
+add = lambda x, y:   x + y</code></pre>
+</div><div id="why-do-we-need-a-lambda" class="slide section level2">
+<h1>Why do we need a lambda?</h1>
+<p>Actually we don’t totally need them, but yes in two main cases:</p>
+<ul>
+<li>The function is fairly simple</li>
+<li>It is going to be used only once</li>
+</ul>
+</div><div id="randomness" class="slide section level2">
+<h1>Randomness</h1>
+<pre><code>import random
+four_uniform_randoms = [random.random() for _ in range(4)]</code></pre>
+<p><code>random.random()</code> produces numbers uniformly between 0 and 1</p>
+<p>The random module actually produces pseudorandom (that is, deterministic) num‐ bers based on an internal state that you can set with random.seed if you want to get reproducible results:</p>
+<pre><code>random.seed(10)
+random.random()</code></pre>
+<p>We can also use <code>random.randrange()</code></p>
+<pre><code>random.randrange(10)
+random.randrange(3, 6)</code></pre>
+<p>Or <code>random.choice()</code></p>
+<pre><code>my_best_friend = random.choice([&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;])</code></pre>
+<p>Or <code>random.shuffle()</code></p>
+<pre><code>up_to_ten = range(10)
+random.shuffle(up_to_ten)
+print up_to_ten</code></pre>
+</div><div id="regex" class="slide section level2">
+<h1>Regex</h1>
+<p>A regular expression, regex or regexp[1] (sometimes called a rational expression) is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for “find” or “find and replace” operations on strings. <a href="https://en.wikipedia.org/wiki/Regular_expression">Wikipedia</a></p>
+<p>Metacharacters</p>
+<pre><code>. ^ $ * + ? { } [ ] \ | ( )</code></pre>
+<pre><code>\d
+    Matches any decimal digit; this is equivalent to the class [0-9].
+\D
+    Matches any non-digit character; this is equivalent to the class [^0-9].
+\s
+    Matches any whitespace character; this is equivalent to the class [ \t\n\r\f\v].
+\S
+    Matches any non-whitespace character; this is equivalent to the class [^ \t\n\r\f\v].
+\w
+    Matches any alphanumeric character; this is equivalent to the class [a-zA-Z0-9_].
+\W
+    Matches any non-alphanumeric character; this is equivalent to the class [^a-zA-Z0-9_].</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -21,6 +21,8 @@ Python features a dynamic type system and automatic memory management and suppor
 
 * https://docs.python.org/3/
 * http://python-guide-pt-br.readthedocs.io/en/latest/
+* http://book.pythontips.com/
+
 
 ## IDEs
 
@@ -619,6 +621,7 @@ print(range(5))
 
 We say such object is **iterable**, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted. We have seen that the `for` statement is such a **iterator**. The function `list()` is another; is creates lists from **iterables**:
 
+
 ```
 list(range(5))
 ```
@@ -634,3 +637,260 @@ for_else.py
 
 Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.
 
+The continue statement, also borrowed from C, continues with the next iteration of the loop:
+
+```
+continue.py
+```
+
+## The pass Statements
+
+The pass statement does nothing. It can be used when a statement is required sintatically but the program requires no action, For example:
+
+```
+while True:
+  pass ## Busy wait for keyboard interrupt (Ctrl+C)
+```
+
+Or for creating minimal classes:
+
+```
+class MyEmptyClass:
+  pass
+```
+
+In a work in progress:
+
+```
+def initlog(*args):
+  pass
+```
+
+## The while statement
+
+The while statement is used for repeated execution as long as an expression is true:
+
+```
+count = 0
+while (count < 10):
+  print("The count is %d" % count)
+  count = count + 1
+
+print("Good bye")
+
+```
+
+## Defining functions
+
+```
+ejemplo.py
+```
+
+## Classes
+
+```
+number.py
+```
+
+## Generators
+
+First lets understand iterators. According to Wikipedia, an iterator is an object that enables a programmer to traverse a container, particularly lists. However, an iterator performs traversal and gives access to data elements in a container, but does not perform iteration. You might be confused so lets take it a bit slow. There are three parts namely:
+
+* Iterable
+* Iterator
+* Iteration
+
+## Iterable
+
+An `iterable` in Python is any object which has an `__iter__` or a `__getitem__` method defined which returns an *iterator* or can take indexes.
+
+In a short, an `iterable` is any object which can provide us with an *iterator*.
+
+Iter...what?
+
+## Iterator
+
+An iterator is any object in Python which has a `next` (Python2) or `__next__` method defined. That’s it. That’s an iterator. Now let’s understand iteration.
+
+
+## Iteration
+
+In simple words it is the process of taking an item from something e.g a list. When we use a loop to loop over something it is called iteration. It is the name given to the process itself. Now as we have a basic understanding of these terms let’s understand generators.
+
+## Generators
+
+Generators functions allow you to declare a function that behaves like an iterator, i.e. it can be used in a for loop.
+
+A generator is something that you can iterate over (for us, usually using for ) but whose values are produced only as needed (lazily).
+
+```
+# A dummy example
+
+def generator_function():
+    for i in range(10):
+        yield i
+for i in generator_function():
+    print(i)
+```
+
+It is not really useful in this case. Generators are best for calculating large sets of results (particularly calculations involving loops themselves) where you don’t want to allocate the memory for all results at the same time. Many Standard Library functions that return lists in Python 2 have been modified to return generators in Python 3 because generators require fewer resources.
+
+```
+fibonacci_gen.py
+```
+
+Anoother way to use a generator function is by callling the built in function `next()`
+
+
+## Lambdas
+
+Lambda is a tool for building functions, or more precisely, for building function objects. That means that Python has two tools for building functions: def and lambda.
+
+Blueprint
+
+```
+lambda argument: manipulate(argument)
+```
+
+Normal function definition:
+
+```
+def square_root(x): return math.sqrt(x)
+```
+
+The same function as a lambda:
+
+```
+square_root = lambda x: math.sqrt(x)
+```
+
+Another example
+
+```
+def add(x, y): return x + y
+add = lambda x, y:   x + y
+```
+
+## Why do we need a lambda?
+
+Actually we don't totally need them, but yes in two main cases:
+
+* The function is fairly simple
+* It is going to be used only once
+
+
+## Randomness
+
+```
+import random
+four_uniform_randoms = [random.random() for _ in range(4)]
+```
+
+`random.random()` produces numbers uniformly between 0 and 1
+
+The random module actually produces pseudorandom (that is, deterministic) num‐
+bers based on an internal state that you can set with random.seed if you want to get reproducible results:
+
+```
+random.seed(10)
+random.random()
+```
+
+We can also use `random.randrange()`
+
+```
+random.randrange(10)
+random.randrange(3, 6)
+```
+
+Or `random.choice()`
+
+```
+my_best_friend = random.choice(["Alice", "Bob", "Charlie"])
+```
+
+Or `random.shuffle()`
+
+```
+up_to_ten = range(10)
+random.shuffle(up_to_ten)
+print up_to_ten
+```
+
+## Regex
+
+A regular expression, regex or regexp[1] (sometimes called a rational expression) is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for "find" or "find and replace" operations on strings. [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression)
+
+Metacharacters
+
+```
+. ^ $ * + ? { } [ ] \ | ( )
+```
+
+```
+\d
+    Matches any decimal digit; this is equivalent to the class [0-9].
+\D
+    Matches any non-digit character; this is equivalent to the class [^0-9].
+\s
+    Matches any whitespace character; this is equivalent to the class [ \t\n\r\f\v].
+\S
+    Matches any non-whitespace character; this is equivalent to the class [^ \t\n\r\f\v].
+\w
+    Matches any alphanumeric character; this is equivalent to the class [a-zA-Z0-9_].
+\W
+    Matches any non-alphanumeric character; this is equivalent to the class [^a-zA-Z0-9_].
+```
+
+## Inheritance
+
+```
+pet.py
+dog.py
+```
+
+```
+>>> isinstance(mister_pet, Pet)
+True
+>>> isinstance(mister_pet, Dog)
+False
+>>> isinstance(mister_dog, Pet)
+True
+>>> isinstance(mister_dog, Dog)
+True
+```
+
+## Comprehensions
+
+Comprehensions are constructs that allow sequences to be built from other sequences. Three types of comprehensions are supported in both Python 2 and Python 3:
+
+* list comprehensions
+* dictionary comprehensions
+* set comprehensions
+
+Blueprint
+
+```
+variable = [out_exp for out_exp in input_list if out_exp == 2]
+```
+
+Here's a short example
+
+```
+multiples = [i for i in range(30) if i % 3 == 0]
+print(multiples)
+```
+
+If you have something like this:
+
+```
+squared = []
+for x in range(10):
+    squared.append(x**2)
+```
+
+You can simplify it with a comprehension:
+
+```
+squared = [x**2 for x in range(10)]
+```
