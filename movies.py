@@ -159,7 +159,7 @@ final_variables_array = [top20, top5, result]
 # We can get the observations as well
 ratings_by_title = rated_movies.groupby('title').size()
 # Do we need to subset?
-hottest_titles = ratings_by_title.index[ratings_by_title >= 250]
+hottest_titles = ratings_by_title.index[ratings_by_title >= 213]
 print(hottest_titles)
 
 # Getting the mean of rated movies
@@ -174,8 +174,8 @@ mean_ratings = mean_ratings.ix[hottest_titles]
 print(mean_ratings)
 
 
-titles = [hottest_titles[2],hottest_titles[3],hottest_titles[4],hottest_titles[5],hottest_titles[6]]
-mean = [mean_ratings[2], mean_ratings[3], mean_ratings[4], mean_ratings[5], mean_ratings[6]]
+titles = [hottest_titles[0],hottest_titles[1],hottest_titles[2],hottest_titles[3],hottest_titles[4]]
+mean = [mean_ratings[0], mean_ratings[1], mean_ratings[2], mean_ratings[3], mean_ratings[4]]
 xs = [i + 0.1 for i, _ in enumerate(titles)]
 plt.bar(xs,mean)
 plt.xticks([i + 0.0 for i, _ in enumerate(titles)], titles)
@@ -183,30 +183,44 @@ plt.ylabel("mean of rated movies")
 plt.title("the top 5")
 plt.show()
 
-
-#numeros=[1,2,3,4,5]
-
-#promedios=[mean_ratings[0],mean_ratings[1],mean_ratings[2],
-
-#  mean_ratings[3],mean_ratings[4]]
-
-#titulos=[hottest_titles[0],hottest_titles[1],
-
-  #hottest_titles[2],hottest_titles[3],hottest_titles[4]]
-
-#plt.scatter(numeros,promedios)
-
-#for titulo, numeros_count, promedios_count in zip(titulos, numeros, promedios):
-
-  #plt.annotate(titulo,xy=(numeros_count,promedios_count),
-
-    #xytext=(5,-5),textcoords='offset points')
-
-#plt.title("Peliculas mas populares")
-
-#plt.ylabel("Calificacion promedio")
-
+#titles = [hottest_titles[0],hottest_titles[1],hottest_titles[2],hottest_titles[3],hottest_titles[4],hottest_titles[5],hottest_titles[6],hottest_titles[7],hottest_titles[8],hottest_titles[9],hottest_titles[10],hottest_titles[11],hottest_titles[12],hottest_titles[13],hottest_titles[14],hottest_titles[15],hottest_titles[16],hottest_titles[17],hottest_titles[18],hottest_titles[19]]
+#mean = [mean_ratings[0], mean_ratings[1], mean_ratings[2], mean_ratings[3], mean_ratings[4], mean_ratings[5],mean_ratings[5],mean_ratings[7],mean_ratings[8],mean_ratings[9],mean_ratings[10],mean_ratings[11],mean_ratings[12],mean_ratings[13],mean_ratings[14],mean_ratings[15],mean_ratings[16],mean_ratings[17],mean_ratings[18],mean_ratings[19]]
+#xs = [i + 0.1 for i, _ in enumerate(titles)]
+##plt.bar(xs,mean)
+#plt.xticks([i + 0.0 for i, _ in enumerate(titles)], titles)
+#plt.ylabel("mean of rated movies")
+#plt.title("the top 5")
 #plt.show()
+
+numbers=[]
+
+mean=[]
+
+titles=[]
+
+for i in range(0,20):
+
+  numbers.append(i)
+
+  mean.append(mean_ratings[i])
+
+  titles.append(hottest_titles[i])
+
+plt.scatter(numbers,mean)
+
+for titulo, numeros_count, promedios_count in zip(titles, numbers, mean):
+
+  plt.annotate(titulo,xy=(numeros_count,promedios_count),
+
+    xytext=(5,5),textcoords='offset points')
+
+plt.title("Top 20")
+
+plt.ylabel("mean of rated movies")
+
+plt.show()
+
+
 
 # For loop for generating the files
 for i in range(3):
