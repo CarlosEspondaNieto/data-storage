@@ -1,0 +1,90 @@
+---
+title: "PostgreSQL"
+author: "Jorge Alcaraz"
+date: "1 de mayo de 2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## PostgreSQL
+
+![PostgreSQL](images/elephant.png)
+
+## What is?
+
+PostgreSQL, often simply Postgres, is an object-relational database (ORDBMS) – i.e. an RDBMS, with additional (optional use) "object" features – with an emphasis on extensibility and standards compliance. As a database server, its primary functions are to store data securely and return that data in response to requests from other software applications. It can handle workloads ranging from small single-machine applications to large Internet-facing applications (or for data warehousing) with many concurrent users; on macOS Server, PostgreSQL is the default database; and it is also available for Microsoft Windows and Linux (supplied in most distributions).
+
+## Architectural fundamentals
+
+PostgreSQL uses a client/server model. A PostgreSQL session consists of the following cooperating processes (programs):
+
+* A server process, which manages the database files, accepts connections to the database, from client applications, and performs database actions on behalf of the clients. The database server program is called postgres.
+* The user's client (frontend) application that wants to perforn database operations. Client applications can be very diverse in nature: a client could be a text-oriented tool, a graphical application, a web server that accesses the database to display web pages, or a specialized database maintanence tool.
+
+We usually communicate with a postgres process over a TCP/IP network connection.
+
+The PostgreSQL server can handle multiple concurrent connections from clients. To achieve this is starts ("forks") a new process for each connection. The client and the new server process communicate without intervention by the original postgres process.
+
+## Installing PostgreSQL
+
+For Mac
+
+[PostgresApp](http://postgresapp.com/)
+
+For Linux
+
+Ubuntu/Debian
+
+```
+sudo apt-get install postgresql
+```
+
+Fedora/CentOS/RedHat
+
+* Head over the [PostgreSQL Yum Repository](https://yum.postgresql.org/)
+* Select the version of PostgreSQL that you want to install and then your OS, version and architecture.
+* Download the RPM for your platform (using the link from step 2)
+```
+curl -O http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm
+```
+* Install the RPM
+```
+rpm -ivh pgdg-centos92-9.2-6.noarch.rpm
+```
+* Do a quick search which will show you available packages for postgres
+```
+yum list postgres*
+```
+
+```
+yum install postgresql92-server.x86_64 postgresql92-contrib.x86_64 postgresql92-devel.x86_64
+```
+
+On Windows
+
+[Windows Installer](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+
+## Connecting
+
+```
+$ psql
+```
+
+```
+$ psql -U postgres
+```
+
+```
+$ psql -W postgres
+```
+
+```
+$ sudo su
+$ su postgres
+$ psql
+```
+## Users
+

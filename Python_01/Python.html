@@ -30,6 +30,7 @@ Jorge Alcaraz
 <ul>
 <li><a href="https://docs.python.org/3/" class="uri">https://docs.python.org/3/</a></li>
 <li><a href="http://python-guide-pt-br.readthedocs.io/en/latest/" class="uri">http://python-guide-pt-br.readthedocs.io/en/latest/</a></li>
+<li><a href="http://book.pythontips.com/" class="uri">http://book.pythontips.com/</a></li>
 </ul>
 </div>
 <div id="ides" class="slide section level2">
@@ -560,6 +561,37 @@ print up_to_ten</code></pre>
     Matches any alphanumeric character; this is equivalent to the class [a-zA-Z0-9_].
 \W
     Matches any non-alphanumeric character; this is equivalent to the class [^a-zA-Z0-9_].</code></pre>
+</div><div id="inheritance" class="slide section level2">
+<h1>Inheritance</h1>
+<pre><code>pet.py
+dog.py</code></pre>
+<pre><code>&gt;&gt;&gt; isinstance(mister_pet, Pet)
+True
+&gt;&gt;&gt; isinstance(mister_pet, Dog)
+False
+&gt;&gt;&gt; isinstance(mister_dog, Pet)
+True
+&gt;&gt;&gt; isinstance(mister_dog, Dog)
+True</code></pre>
+</div><div id="comprehensions" class="slide section level2">
+<h1>Comprehensions</h1>
+<p>Comprehensions are constructs that allow sequences to be built from other sequences. Three types of comprehensions are supported in both Python 2 and Python 3:</p>
+<ul>
+<li>list comprehensions</li>
+<li>dictionary comprehensions</li>
+<li>set comprehensions</li>
+</ul>
+<p>Blueprint</p>
+<pre><code>variable = [out_exp for out_exp in input_list if out_exp == 2]</code></pre>
+<p>Here’s a short example</p>
+<pre><code>multiples = [i for i in range(30) if i % 3 == 0]
+print(multiples)</code></pre>
+<p>If you have something like this:</p>
+<pre><code>squared = []
+for x in range(10):
+    squared.append(x**2)</code></pre>
+<p>You can simplify it with a comprehension:</p>
+<pre><code>squared = [x**2 for x in range(10)]</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
