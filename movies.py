@@ -3,13 +3,19 @@
 # Data Graduates: Analysis and Other Examples
 # Author: Jorge Raze
 
+#Carlos' note: In line 185 begins my code
+
 # First import urllib for downloading and uncompress the file
 import urllib.request
 import zipfile
 import os
+from collections import Counter
 import pandas as pd
 from statistics import mean
 from matplotlib import pyplot as plt
+import numpy as np
+import seaborn 
+seaborn.set() 
 
 DEBUG = False
 
@@ -129,7 +135,7 @@ rated_movies[rated_movies['title'] == 'Shawshank Redemption, The (1994)']
 grouped = rated_movies.groupby('title')
 group_by_sum = grouped.aggregate(sum)
 group_by_mean = grouped.aggregate(mean)
-# group_by_count = grouped.aggregate(count)
+#group_by_count = Counter(grouped).most_common(20)
 
 # Or the short way
 grouped = rated_movies.groupby('title').sum()
@@ -158,68 +164,81 @@ final_variables_array = [top20, top5, result]
 
 # We can get the observations as well
 ratings_by_title = rated_movies.groupby('title').size()
+#sorting the reviews in order desc
+reviews_count = ratings_by_title.sort_values(ascending=False)[0:20]
+
 # Do we need to subset?
 hottest_titles = ratings_by_title.index[ratings_by_title >= 213]
-print(hottest_titles)
-
+hottest_titles2 = [x.replace("'",'') for x in hottest_titles]
+#hottest_titles3 = [str(x) for x in hottest_titles2]
 # Getting the mean of rated movies
 mean_ratings = rated_movies.pivot_table(
     'rating',
     index='title',
     aggfunc='mean')
 
+
+
 # The mean of the hottest movies
 mean_ratings = mean_ratings.ix[hottest_titles]
+mean_ratings = mean_ratings.sort_values(ascending=False) 
 
 print(mean_ratings)
 
 
-titles = [hottest_titles[0],hottest_titles[1],hottest_titles[2],hottest_titles[3],hottest_titles[4]]
-mean = [mean_ratings[0], mean_ratings[1], mean_ratings[2], mean_ratings[3], mean_ratings[4]]
-xs = [i + 0.1 for i, _ in enumerate(titles)]
-plt.bar(xs,mean)
-plt.xticks([i + 0.0 for i, _ in enumerate(titles)], titles)
-plt.ylabel("mean of rated movies")
-plt.title("the top 5")
+#-------LINEAR AND BAR CHARTS CODE OF MOVIES---------------------------------
+
+#Here we are storing the names of the top 20 with the same order into a list:rating_names
+rating_names=[x for x in top20.index[:]]
+
+#Here  we put a range to x-axis, which lenght is 20
+x_axis= np.arange(0.0,20.0,1.0)
+#Setting the rating_names as x-labels
+plt.xticks(x_axis, rating_names, rotation=-90)
+#x and y values
+plt.plot(x_axis,top20, 'go-')
+plt.title("Top 20 of ratings")
+plt.ylabel("# of ratings ")
 plt.show()
 
-#titles = [hottest_titles[0],hottest_titles[1],hottest_titles[2],hottest_titles[3],hottest_titles[4],hottest_titles[5],hottest_titles[6],hottest_titles[7],hottest_titles[8],hottest_titles[9],hottest_titles[10],hottest_titles[11],hottest_titles[12],hottest_titles[13],hottest_titles[14],hottest_titles[15],hottest_titles[16],hottest_titles[17],hottest_titles[18],hottest_titles[19]]
-#mean = [mean_ratings[0], mean_ratings[1], mean_ratings[2], mean_ratings[3], mean_ratings[4], mean_ratings[5],mean_ratings[5],mean_ratings[7],mean_ratings[8],mean_ratings[9],mean_ratings[10],mean_ratings[11],mean_ratings[12],mean_ratings[13],mean_ratings[14],mean_ratings[15],mean_ratings[16],mean_ratings[17],mean_ratings[18],mean_ratings[19]]
-#xs = [i + 0.1 for i, _ in enumerate(titles)]
-##plt.bar(xs,mean)
-#plt.xticks([i + 0.0 for i, _ in enumerate(titles)], titles)
-#plt.ylabel("mean of rated movies")
-#plt.title("the top 5")
+
+#Storing the names of the reviews_count into titles with the same order of reviews_count
+titles = [x for x in reviews_count.index[:]]
+
+xs = [i + 0.1 for i, _ in enumerate(titles)]
+plt.bar(xs,reviews_count)
+plt.xticks([i + 0.0 for i, _ in enumerate(titles)], titles, rotation=90)
+plt.ylabel("# of reviews", )
+plt.title("Top 20 of the most viewed movies")
+plt.show()
+
+#---
+rate_by_point_redemption = result[result['title']== 'Shawshank Redemption, The (1994)'].groupby('rating').size()
+#transforming the serie result into a dictionary with th e data I need
+rate_by_point_redemption_dict= rate_by_point_redemption.to_dict()
+#Generating a new dictionary sorted by key
+o_rate_by_point_redemption_dict = collections.OrderedDict(sorted(rate_by_point_redemption_dict.items()))
+#Here I'm taking apart the keys and the values, storing each one in lists
+keys_redemption = list(o_rate_by_point_redemption_dict.keys())
+values_redemption = list(o_rate_by_point_redemption_dict.values())
+
+width=0.3
+plt.bar(keys_redemption, values_redemption, width, color='green', align='center')
+plt.ylabel("# of reviews")
+
+plt.title('reviews by each rating of Shawshank Redemption')
+plt.xticks(keys_redemption)
+
+plt.show()
+
+#y_axis= np.arange(0.0,20.0,1.0)
+#plt.yticks(y_axis, titles2)
+#plt.plot(reviews_count, y_axis, 'o-')
+#plt.title("Top 20 of the most viewed movies")
+#plt.xlabel("# of reviews")
 #plt.show()
 
-numbers=[]
-
-mean=[]
-
-titles=[]
-
-for i in range(0,20):
-
-  numbers.append(i)
-
-  mean.append(mean_ratings[i])
-
-  titles.append(hottest_titles[i])
-
-plt.scatter(numbers,mean)
-
-for titulo, numeros_count, promedios_count in zip(titles, numbers, mean):
-
-  plt.annotate(titulo,xy=(numeros_count,promedios_count),
-
-    xytext=(5,5),textcoords='offset points')
-
-plt.title("Top 20")
-
-plt.ylabel("mean of rated movies")
-
-plt.show()
-
+#top20_dict = top20._dict_()
 
 
 # For loop for generating the files
