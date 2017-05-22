@@ -77,9 +77,7 @@ Jorge Raze
 <div id="back-to-r" class="slide section level2">
 <h1>Back to R</h1>
 <p>The R language came to use quite a bit after S had been deeloped. One key limitation of the S language was that it was only available in a commercial package, S-PLUS. In 1991, R was created by Ross Ihaka and Robert Gentleman in the Department of Statistics at the University of Auckland. In 1993 the first announcment of R was made to the public. Ross’s and Robert’s experience developing R is documented in a 1996 paper in the <em>Journal of Computational and Graphical Statistics</em></p>
-<blockquote>
 <p>Ross Ihaka and Robert Gentleman. R: A language for data analysis and grapics. Jorual of Computational and Graphical Statistics, 5(3):299-314,1996</p>
-</blockquote>
 <p>In 1995, Martin Mächler made an important contribution by convincing Ross and Robert to use the GNU General Public License to make R free software. This was critical because it allowed for the source code for the entire R system to be accessible to anyone who wanted to tinker with it (more on free software later).</p>
 <p>In 1996, a public mailing list was created (the R-help and R-devel lists) and in 1997 the R Core Group was formed, containing some people associated with S and S-PLUS. Currently, the core group controls the source code for R and is solely able to check in changes to the main R source tree. Finally, in 2000 R version 1.0.0 was released to the public.</p>
 <p>Fragment from: Roger D. Peng. “R Programming for Data Science”.</p>
@@ -228,12 +226,12 @@ y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot
 <p>Sometimes, R can’t figure out how to coerce an object and this can result in NAs being produced.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)
 <span class="kw">as.numeric</span>(x)</code></pre></div>
-<pre><code>## Warning: NAs introducidos por coerción</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA NA NA</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.logical</span>(x)</code></pre></div>
 <pre><code>## [1] NA NA NA</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.complex</span>(x)</code></pre></div>
-<pre><code>## Warning: NAs introducidos por coerción</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA NA NA</code></pre>
 </div>
 <div id="matrices" class="slide section level2">
@@ -249,7 +247,117 @@ m</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attributes</span>(m)</code></pre></div>
 <pre><code>## $dim
 ## [1] 2 3</code></pre>
+<p>Matrices are constructed <strong>column-wise</strong>, so entries can be thought of starting in the “upper left” corner and running down the columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+m</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<p>You can create a matrix from vectors by adding a dimension attribute.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
+m</code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(m) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)
+m</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    3    5    7    9
+## [2,]    2    4    6    8   10</code></pre>
+<p>Matrices can be created by <strong>column-binding</strong> or <strong>row-binding</strong> with the <code>cbind()</code> and <code>rbind()</code> functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
+y &lt;-<span class="st"> </span><span class="dv">10</span>:<span class="dv">12</span>
+<span class="kw">cbind</span>(x, y)</code></pre></div>
+<pre><code>##      x  y
+## [1,] 1 10
+## [2,] 2 11
+## [3,] 3 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(x, y)</code></pre></div>
+<pre><code>##   [,1] [,2] [,3]
+## x    1    2    3
+## y   10   11   12</code></pre>
 </div>
+<div id="lists" class="slide section level2">
+<h1>Lists</h1>
+<p>Lists are a special type of vector that can contaian elements of different classes. Lists are very important data type in R and you should get to know them well. Lists, in a combination with the various “apply” functions discussed later, make for a powerful combination.</p>
+<p>You can create them with the <code>list()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>, <span class="dv">1</span>+4i)
+x</code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] &quot;a&quot;
+## 
+## [[3]]
+## [1] TRUE
+## 
+## [[4]]
+## [1] 1+4i</code></pre>
+<p>We can also create an empty list of a prespecified length with the <code>vector()</code> function:</p>
+<pre><code>x &lt;- vector(&quot;list&quot;, length=5)
+x</code></pre>
+</div>
+<div id="factors" class="slide section level2">
+<h1>Factors</h1>
+<p>“Factors are used to represent categorical data and can be unordered or ordered. One can think of a factor as an integer vector where each integer has a label.”</p>
+<p>Using factors with labels is better than using integers because factors are self-describing. Having a variable that has values “Male” and “Female” is better than a variable that has values 1 and 2.</p>
+<pre><code>x &lt;- factor(c(&quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;))
+table(x)
+unclass(x)</code></pre>
+<p>The order of the levels of a factor can be set using the levels argument to factor(). This can be important in linear modelling because the first level is used as the baseline level.</p>
+<pre><code>x &lt;- factor(c(&quot;yes&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;), levels = c(&quot;yes&quot;, &quot;no&quot;))
+x</code></pre>
+</div>
+<div id="missing-values" class="slide section level2">
+<h1>Missing Values</h1>
+<p>Missing values are denoted by NA or NaN for q undefined mathematical operations.</p>
+<ul>
+<li>is.na() is used to test objects if they are NA</li>
+<li>is.nan() is used to test for NaN</li>
+<li>NA values have a class also, so there are integer NA, character NA, etc.</li>
+<li>A NaN value is also NA but the converse is not true</li>
+</ul>
+<pre><code>## Create a vector with NAs in it
+x &lt;- c(1, 2, NA, 10, 3)  
+## Return a logical vector indicating which elements are NA
+is.na(x)    
+## Return a logical vector indicating which elements are NaN
+is.nan(x)
+## Now create a vector with both NA and NaN values
+x &lt;- c(1, 2, NaN, NA, 4)
+is.na(x)
+is.nan(x)</code></pre>
+</div>
+<div id="data-frames" class="slide section level2">
+<h1>Data Frames</h1>
+<p>Data frames are used to store tabular data in R. They are an important type of object in R and are used in a variety of statistical modeling applications.</p>
+<p>Data frames are represented as a special type of list where every element of the list has to have the same length. Each element of the list can be thought of as a column and the length of each element of the list is the number of rows.</p>
+<p>Data frames are usually created by reading in a dataset using the <code>read.table()</code> or <code>read.csv()</code>. However, data frames can also be created explicitly with the <code>data.frame()</code> function or they can be coerced from other types of objects like lists.</p>
+<pre><code>x &lt;- data.frame(foo = 1:4, bar = c(T, T, F, F))
+nrow(x)
+ncol(x)
+dim(x)</code></pre>
+</div>
+<div id="names" class="slide section level2">
+<h1>Names</h1>
+<p>R objects can have names, which is very useful for writing readable code and self-describing objects. Here is an example of assigning names to an integer vector.</p>
+<pre><code>x &lt;- 1:3
+names(x)
+names(x) &lt;- c(&quot;Los Angeles&quot;, &quot;New York&quot;, &quot;Florida&quot;)
+names(x)</code></pre>
+<p>Lists can also have names, which is often very useful.</p>
+<pre><code>x &lt;- list(&quot;Los Angeles&quot; = 1, Boston = 2, London = 3)
+x
+names(x)</code></pre>
+<p>Matrices can have both column and row names.</p>
+<pre><code>m &lt;- matrix(1:4, nrow = 2, ncol = 2)
+dimnames(m) &lt;- list(c(&quot;a&quot;, &quot;b&quot;), c(&quot;c&quot;, &quot;d&quot;))</code></pre>
+<p>Column names and row names can be set separately using the <code>colnames()</code> and <code>rownames()</code> functions.</p>
+<pre><code>colnames(m) &lt;- c(&quot;h&quot;, &quot;f&quot;)
+rownames(m) &lt;- c(&quot;x&quot;, &quot;z&quot;)
+m</code></pre>
+<p>Note that for data frames, there is a separate function for setting the row names, the row.names() function. Also, data frames do not have column names, they just have names (like lists). So to set the column names of a data frame just use the names() function. Yes, I know its confusing.</p>
+</div>
+<div id="getting-data-in-and-out-of-r" class="titleslide slide section level1"><h1>Getting Data In and Out of R</h1></div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
