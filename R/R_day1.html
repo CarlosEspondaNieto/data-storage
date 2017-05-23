@@ -357,7 +357,81 @@ rownames(m) &lt;- c(&quot;x&quot;, &quot;z&quot;)
 m</code></pre>
 <p>Note that for data frames, there is a separate function for setting the row names, the row.names() function. Also, data frames do not have column names, they just have names (like lists). So to set the column names of a data frame just use the names() function. Yes, I know its confusing.</p>
 </div>
-<div id="getting-data-in-and-out-of-r" class="titleslide slide section level1"><h1>Getting Data In and Out of R</h1></div>
+<div id="getting-data-in-and-out-of-r" class="slide section level2">
+<h1>Getting Data In and Out of R</h1>
+<p>There are a few principal functions for reading data into R.</p>
+<ul>
+<li><code>read.table</code>, <code>read.csv</code> for reading tabular data</li>
+<li><code>readLines</code> for reading lines of a txt file</li>
+<li><code>source</code> for reading in R code files (inverse of <code>dump</code>)</li>
+<li><code>dget</code> for reading in R code files (inverse of <code>dput</code>)</li>
+<li><code>load</code>, for reading in saved workspaces</li>
+<li><code>unserialize</code>, for reading single R objects in binary form</li>
+</ul>
+<p>And the analogous functions for writing data into files</p>
+<ul>
+<li><code>write.table</code>, for writing tabular data to text files (i.e. CSV) or connections</li>
+<li><code>writeLines</code>, for writing character data line-by-line to a file or connection</li>
+<li><code>dump</code>, for dumping a textual representation of multiple R objects</li>
+<li><code>dput</code>, for outputting a textual representation of an R object</li>
+<li><code>save</code>, for saving an arbitrary number of R objects in binary format (possibly compressed) to a file.</li>
+<li><code>serialize</code>, for converting an R object into a binary format for outputting to a connection (or file).</li>
+</ul>
+</div>
+<div id="reading-data-files" class="slide section level2">
+<h1>Reading data files</h1>
+<h3 id="read.table"><code>read.table()</code></h3>
+<p>Read the help file:</p>
+<pre><code>? read.table</code></pre>
+<p>Important arguments:</p>
+<ul>
+<li><em>file</em>, the name of a file, or a connection</li>
+<li><em>header</em>, logical indicating if the file has a header line</li>
+<li><em>sep</em>, a string indicating how the columns are separated</li>
+<li><em>colClasses</em>, a character vector indicating the class of each column in the dataset</li>
+<li><em>nrows</em>, the number of rows in the dataset. By default read.table() reads an entire file.</li>
+<li><em>comment.char</em>, a character string indicating the comment character. This defalts to “#”. If there are no commented lines in your file, it’s worth setting this to be the empty string “”.</li>
+<li><em>skip</em>, the number of lines to skip from the beginning</li>
+<li><em>stringsAsFactors</em>, should character variables be coded as factors? This defaults to TRUE because back in the old days, if you had data that were stored as strings, it was because those strings represented levels of a categorical variable. Now we have lots of data that is text data and they don’t always represent categorical variables.</li>
+</ul>
+</div>
+<div id="defaults" class="slide section level2">
+<h1>Defaults</h1>
+<pre><code>read.table('somefile.txt')</code></pre>
+<p>If you call read.table wit hthe defaults, R will automatically</p>
+<ul>
+<li>skip lines that begin with #</li>
+<li>figure out how many rows there are (and how much memory needs to be allocated)</li>
+<li>figure what type of variable is in each column of the table</li>
+</ul>
+<p>On the other hand, if you explicitly tell to R what to do with the file it will run faster. The <code>read.csv()</code> function is identical to <code>read.table()</code> except that some of the defaults are set differently.</p>
+</div>
+<div id="reading-in-larger-datasets-with-read.table" class="slide section level2">
+<h1>Reading in Larger Datasets with read.table</h1>
+<p>Try to:</p>
+<ul>
+<li>Read the help page of read.table, which contains many hints</li>
+<li>Make a rough calculation of the memory required to store your dataset</li>
+<li>Set comment.char = “” if there are no commented lines in your file</li>
+<li>Use the colClasses argument</li>
+</ul>
+<p>A quick and dirty way to figure out the classes of each colum is the following:</p>
+<pre><code>initial &lt;- read.table(&quot;datatable.txt&quot;, nrows = 100)
+classes &lt;- sapply(initial, class)
+tabAll &lt;- read.table(&quot;datatable.txt&quot;, colClasses = classes)</code></pre>
+<ul>
+<li>Figure out how many lines does the dataset contains</li>
+<li>Figure out how much memory do you have installed</li>
+</ul>
+</div>
+<div id="calculating-memory-requirements-for-r-objects" class="slide section level2">
+<h1>Calculating Memory requirements for R objects</h1>
+<p>For example, suppose I have a data frame with 1,500,000 rows and 120 columns, all of which are numeric data. Roughly, how much memory is required to store this data frame? Well, on most modern computers double precision floating point numbers are stored using 64 bits of memory, or 8 bytes. Given that information, you can do the following calculation</p>
+<pre><code>1,500,000 × 120 × 8 bytes/numeric   = 1,440,000,000 bytes
+    = 1,440,000,000 / 220 bytes/MB
+    = 1,373.29 MB
+    = 1.34 GB”</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

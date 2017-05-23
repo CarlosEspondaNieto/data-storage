@@ -359,5 +359,88 @@ m
 
 Note that for data frames, there is a separate function for setting the row names, the row.names() function. Also, data frames do not have column names, they just have names (like lists). So to set the column names of a data frame just use the names() function. Yes, I know its confusing.
 
-# Getting Data In and Out of R
+## Getting Data In and Out of R
 
+There are a few principal functions for reading data into R.
+
+* `read.table`, `read.csv` for reading tabular data
+* `readLines` for reading lines of a txt file
+* `source` for reading in R code files (inverse of `dump`)
+* `dget` for reading in R code files (inverse of `dput`)
+* `load`, for reading in saved workspaces
+* `unserialize`, for reading single R objects in binary form
+
+And the analogous functions for writing data into files
+
+* `write.table`, for writing tabular data to text files (i.e. CSV) or connections
+* `writeLines`, for writing character data line-by-line to a file or connection
+* `dump`, for dumping a textual representation of multiple R objects
+* `dput`, for outputting a textual representation of an R object
+* `save`, for saving an arbitrary number of R objects in binary format (possibly compressed) to a file.
+* `serialize`, for converting an R object into a binary format for outputting to a connection (or file).
+
+## Reading data files
+
+### `read.table()`
+
+Read the help file:
+
+```
+? read.table
+```
+
+Important arguments:
+
+* *file*, the name of a file, or a connection
+* *header*, logical indicating if the file has a header line
+* *sep*, a string indicating how the columns are separated
+* *colClasses*, a character vector indicating the class of each column in the dataset
+* *nrows*, the number of rows in the dataset. By default read.table() reads an entire file.
+* *comment.char*, a character string indicating the comment character. This defalts to "#". If there are no commented lines in your file, it’s worth setting this to be the empty string "".
+* *skip*, the number of lines to skip from the beginning
+* *stringsAsFactors*, should character variables be coded as factors? This defaults to TRUE because back in the old days, if you had data that were stored as strings, it was because those strings represented levels of a categorical variable. Now we have lots of data that is text data and they don’t always represent categorical variables.
+
+## Defaults
+
+```
+read.table('somefile.txt')
+```
+
+If you call read.table wit hthe defaults, R will automatically
+
+* skip lines that begin with #
+* figure out how many rows there are (and how much memory needs to be allocated)
+* figure what type of variable is in each column of the table
+
+On the other hand, if you explicitly tell to R what to do with the file it will run faster. The `read.csv()` function is identical to `read.table()` except that some of the defaults are set differently.
+
+## Reading in Larger Datasets with read.table
+
+Try to:
+
+* Read the help page of read.table, which contains many hints 
+* Make a rough calculation of the memory required to store your dataset
+* Set comment.char = "" if there are no commented lines in your file
+* Use the colClasses argument
+
+A quick and dirty way to figure out the classes of each colum is the following:
+
+```
+initial <- read.table("datatable.txt", nrows = 100)
+classes <- sapply(initial, class)
+tabAll <- read.table("datatable.txt", colClasses = classes)
+```
+
+* Figure out how many lines does the dataset contains
+* Figure out how much memory do you have installed
+
+## Calculating Memory requirements for R objects
+
+For example, suppose I have a data frame with 1,500,000 rows and 120 columns, all of which are numeric data. Roughly, how much memory is required to store this data frame? Well, on most modern computers double precision floating point numbers are stored using 64 bits of memory, or 8 bytes. Given that information, you can do the following calculation
+
+```
+1,500,000 × 120 × 8 bytes/numeric	= 1,440,000,000 bytes
+    = 1,440,000,000 / 220 bytes/MB
+    = 1,373.29 MB
+    = 1.34 GB”
+```
