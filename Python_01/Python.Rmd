@@ -1,0 +1,896 @@
+---
+title: "Python"
+author: "Jorge Alcaraz"
+date: "5/3/2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Python
+
+Python is a widely used high-level programming language for general-purpose programming, created by Guido van Rossum and first released in 1991. An interpreted language, Python has a design philosophy which emphasizes code readability (notably using whitespace indentation to delimit code blocks rather than curly braces or keywords), and a syntax which allows programmers to express concepts in fewer lines of code than possible in languages such as C++ or Java. The language provides constructs intended to enable writing clear programs on both a small and large scale.[24]
+
+Python features a dynamic type system and automatic memory management and supports multiple programming paradigms, including object-oriented, imperative, functional programming, and procedural styles. It has a large and comprehensive standard library.
+
+[Source: Wikipedia](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+## Bibliography
+
+* https://docs.python.org/3/
+* http://python-guide-pt-br.readthedocs.io/en/latest/
+* http://book.pythontips.com/
+
+
+## IDEs
+
+* Eclipse with PyDev Plugin
+* Python Tools for Visual Studio (for Windows users)
+* PyCharm
+* Spyder
+* Komodo IDE
+
+I like to use SublimeText3 with Anaconda pluggin
+
+## Before we get to the code
+
+1. Programs are composed of modules
+2. Modules contains statements
+3. Statements contains expressions
+4. Expressions create and process objects
+
+## The Zen of Python
+
+```
+import this
+```
+
+## The State of Python (3 & 2)
+
+* Most production applications today use Python 2.7
+* Python 3 is ready for the production deployment of applications today
+* Python 2.7 will only receive necessary security updates until 2020
+* The brand name Python encapsuates both Python 3 and Python 2
+
+## Recommendations
+
+* Use python 3 for new Python applications
+* If you're learning python for the first time, familiarizing yourself with Python 2.7 will be very useful, but not more useful than learning python 3
+* Learn both. They are both python
+* Software that is already built often depends on Python 2.7
+
+## Implementations
+
+* CPython
+* Jython
+* PyPy
+* IronPython
+* PythonNet
+
+## Using the Python Interpreter 
+
+Your python interpreter is usually on `/usr/local/bin/python3.6` or `/usr/bin/python3.6`
+
+```
+$ python3.6
+```
+
+You can exit with the `quit()` function or hitting `Control-D`
+
+Another way of starting the interpreter is `python -c command [arg] ...` which executes the statement in **command** analogous to the shell's `-c` option.
+
+Some python modules are also helpful as scripts. These can be invoked using `python -m module [arg] ...`
+
+Example:
+
+```
+python -m SimpleHTTPServer 8000
+```
+
+[All details of the CLI](https://docs.python.org/3/using/cmdline.html#using-on-general)
+
+## Argument Passing
+
+When known to the interpreter, the script name and additional arguments thereafter are turned into a list of strings and assigned to the `argv` variable in the `sys` module. You can access this list by executing `import sys`.
+
+## The Interpreter and its Environment
+
+By default, Python source files are treated as encoded in UTF-8. In that encoding, characters of most languages in the world can be used simultaneously in string literals, identifiers and comments - although the standard library only uses ASCII characters for identifiers, a convention that any portable code should follow. To display all these characters properly, your editor must recognize that the file is UTF-8, and it must usse a font that supports all the characters in the file.
+
+To declare an encoding other than the default one, a special comment line should be added as the **first** line of the file. The syntax is as follows:
+
+```
+# -*- coding: encoding -*-
+```
+
+Where encoding is one of the valid [codecs](https://docs.python.org/3/library/codecs.html#module-codecs) supported by Python.
+
+For example
+
+```
+# -*- coding: utf-8 -*-
+```
+
+One exception to the **first line** rule is when the source code starts with a UNIX "shebang" line. In this case, the encoding should be added as the second line of the file. For example:
+
+```
+#!/usr/bin/env python3
+# -*- coding: cp-1252 -*-
+```
+
+## Python Data Types
+
+* Numbers
+* Strings
+* Lists
+* Dictionaries
+* Tuples
+* Files
+* Sets (deprecated since 2.6)
+* Other core types (Booleans, Types, None)
+
+## An informal Introduction to Python
+
+Comments
+
+```
+# This is the first comment
+spam = 1 # and this is the second comment
+         # and a third
+text = "# this is not a comment because it's inside quotes"
+```
+
+## Using Python as a Calculator
+
+Numbers
+
+Expression syntax is straightforward, the operators are the same as in the other languages: `+`, `-`, `/`, `*`, parentheses `(())` can be used for grouping.
+
+```
+>>> 2+2
+4
+>>> 50 - 5*6
+20
+>>> (50 - 5*6) / 4
+5.0
+>>> 8/5 # division always return a floating point number
+1.6
+```
+
+The integer numbers (e.g. 2, 4, 20) have type `int`, the ones with a fractional part (e.g. 5.0, 6.0) have type `float`.
+
+Division `/` always return a float. To do floor division and get an integer result (discarding fractional result) you can use the `//` operator; to calculate the remainder you can use the `%`:
+
+```
+>>> 17/3
+5.66666666667
+>>> 17//3
+5
+>>> 17%3
+2
+>>> 5 * 3 + 2
+17
+```
+
+With python, it is possible to use the `**` operator to calculate powers:
+
+```
+>>> 5 ** 2 # 5 squared
+25
+>>> 2 ** 7 # 2 to the power of 7
+128
+```
+
+The equal sign `=` is used to assign a value to a variable. Afterwards, no result is displayed before the next interactive prompt:
+
+```
+>>> width = 20
+>>> width = 5 * 9
+>>> width * height
+900
+```
+If a variable is not "defined", trying to use will give a error:
+
+```
+>>> n 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'n' is not defined
+```
+
+In interactive mode, the last printed expression is assigned to the variable `_`. This means that when you are using python as a desk calculator, it is somewhat easier to continue calculations, for example:
+
+```
+>>> tax = 12.5 / 100
+>>> price = 100.50
+>>> price * tax
+12.5625
+>>> price + _
+113.0625
+>>> round(_, 2)
+113.06
+```
+
+In addition to `int` and `float`, python supports other types of numbers, such as `Decimal` and `Fraction`. Python also has built-in support for complex numbers, and uses the `j` or `J` suffix to indicate the imaginary part (e.g. `3+5j`).
+
+## Strings
+
+Besides numbers, Python can also manipulate strings, which can be expressed in several ways. They can be enclosed in single quotes or double quotes with the same result. You can use `\` to escape quotes:
+
+```
+'spam eggs' # single quotes
+'doesn\'t' # use \' to escape the single quote
+"doesn't" # or use double quotes instead
+'"Yes", he said'
+```
+
+## Long strings:
+
+```
+print("""\
+Usage: thingy [OPTIONS]
+      -h            Displays this message
+      -H hostname   Hostname to connect to
+""")
+```
+
+## Strings can be glued together with the `+` operator and repeated with `*`:
+
+```
+3 * 'omn' + 'ium'
+```
+
+Two or more string literals (the ones enclosed between quotes) next to each other are concatenated automatically:
+
+```
+'Py' 'thon'
+```
+
+This only works with two literals though, not with variables or expressions:
+
+```
+prefix = 'Py'
+prefix = 'thon' # can't concatenate a variable and a string literal
+```
+
+In that case, you use the `+` operator
+
+```
+prefix + 'thon'
+```
+
+## If you need to break long strings:
+
+```
+text = ('This is a reaaaaaaaaaaaaaaaally long string, '
+        'so I need to break it some way')
+```
+
+## String Indices
+
+Strings can be indexed(subscripted), with the first character having index 0, There is no separate character type; a character is simply a string of size one:
+
+```
+word = 'Python'
+word[0]
+word[5]
+```
+
+Indices may also be negative numbers, to start counting from the right:
+
+```
+word[-1] # last character
+word[-2] # second-last character
+word[-6]
+```
+
+Note that since -0 is the same as 0, negative indices start from -1
+
+In addition to indexing, slicing is also supportes. While indexing is used to obtain individual characters, slicing allows you to obtain substring:
+
+```
+word[0:2] # characters from position 0 (included) to 2 (excluded)
+word[2:5] # characters from position 2 (included) to 5 (excluded)
+```
+
+Note how the start is always included, and the end always excluded. This makes sure that s[:i] + s[i:] is always equal to s:
+
+```
+word[:2] + word[2:]
+word[:2] + word[4:]
+```
+
+Slice indices have useful defaults; an omitted first index defaults to zero, an omitted second index defaults to the size of the string being sliced.
+
+```
+word[:2] # character from the beginning to position 2 (excluded)
+word[4:] # characters from position 4 (included) to the end
+word[-2:] # characters from the second-last (included) to the end
+```
+
+## Strings are immutable in Python
+
+Python strings cannot be changed, they are immutable. Therefore, assigning to an indexed position in the string results in an error:
+
+If you need a different string, you should create a new one:
+
+```
+'J' + word[1:]
+word[:2] + py
+```
+
+The built in function `len()` returns the length of a string:
+
+```
+s = 'tibiritabara'
+len(s)
+12
+```
+
+## Some other String methods
+
+```
+s = 'spam'
+s.find('pa')
+s.replace('pa', 'XYZ')
+line = 'aaa,bbb,ccc'
+line.split(',')
+s = 'spam'
+s.upper()
+s.isalpha() # Check if is alphanumeric, another examples: isdigit
+line = 'aaa,bbb,ccccc,dd\n' 
+line.rstrip() # remove car turn
+line.rstrip().split(',') # combining the two methods
+```
+
+## Formatting expression
+
+```
+'%s, eggs, and %s' % ('spam', 'SPAM!') # all versions
+'{0}, eggs, and {1}'.format('spam', 'SPAM!') # 2.6+, 3.0+
+'{}, eggs, and {}'.format('spam', 'SPAM!') # 2.7+, 3.1+
+```
+
+More formating
+
+```
+'{:,}'.format(296999.2567)
+'{:,.2f}'.format(296999.2567)
+```
+
+## There's a ton of methods
+
+But we will not cover them all
+
+```
+dir(s)
+```
+
+## Lists
+
+Lists in python can be written as a simple comma separated values inside square brackets. Lists might contain items of different types, but usually the items all have the same type.
+
+```
+squares = [1, 4, 9, 16, 25]
+squares
+```
+
+## Indices and slices
+
+Like strings (and all other built-in sequence type), lists can be indexed and sliced:
+
+```
+squares[0] # indexing returns the item
+squares[-1]
+squares[-3:] # slicing returns a new list
+```
+
+All slice operations return a new list containing the requested elements. This means that the following slice returns a new copy of the list:
+
+```
+squares[:]
+```
+
+## Other operations
+
+Lists also support operations like concatenation:
+
+```
+squares + [36, 49, 64, 81, 100]
+```
+
+Unlike strings, which are immutable, lists are a mutable type, i.e. it is possible to change their content:
+
+```
+cubes = [1, 8, 27, 65, 125]  # something's wrong here
+cubes[3] = 4 ** 3
+cubes
+```
+
+## Changing lists
+
+You can also add new items at the end of the list, by using the `append()` method:
+
+```
+cubes.append(216)
+cubes.append(7 ** 3)
+cubes
+cubes.pop(1)
+cubes
+```
+
+Assignment slices is also possible, and this can even change the size of the list or clear ir entirely:
+
+```
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+letters
+letters[2:5] = ['C', 'D', 'E'] # replace some values
+letters
+letters[2:5] = [] # now remove them
+letters
+letters[:] # clear the list
+letters
+```
+
+## Built-in functions
+
+The built-in function also applies to lists:
+
+```
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+len(letters)
+```
+Other examples
+
+```
+m = ['bb', 'aa', 'cc']
+m.sort() # Here we're actually sorting the original list
+m.reverse() # Here as well
+```
+
+## Nesting
+
+It is possible to nest list (create lists containing other lists), for example:
+
+```
+a = ['a', 'b', 'c']
+n = [1, 2, 3]
+x = [a, n]
+x
+```
+
+## Something more complex
+
+```
+fibonacci.py
+```
+
+## Dictionaries
+
+Python dictionaries are something completely different, they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position.
+
+```
+my_dict = {'name': 'Jorge', 'age': 17, 'is_alive': True}
+my_dict['name']
+my_dict['age'] += 1
+```
+
+## More on dicts
+
+```
+new_dict = {}
+new_dict['name'] = 'Jim'
+new_dict['job'] = 'singer'
+new_dict['age'] = 27
+new_dict
+```
+
+Another way to do this
+
+```
+another_dict = dict(name='Jim', job='singer', age=27)
+```
+
+## Nesting
+
+```
+rec = {
+	'name': {
+	    'first': 'Jim',
+	    'last': 'Morrison',
+	    'nick': 'The Lizard King'
+    },
+	'jobs': ['singer', 'poet'],
+	'age': 27
+}
+rec['name']['last']
+rec['jobs']
+rec['jobs'][-1]
+rec['jobs'].append('writter')
+rec
+```
+
+## Accessing Keys
+
+```
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+my_dict.keys()
+keys = list(my_dict.keys()) # unsorted keys list
+keys.sort()
+items = my_dict.items()
+items
+```
+
+## Tuples
+
+The tuple object is roughly like a list that cannot be changed. tuples are sequences, like lists, but they are immutable, like strings. Functionallly, they0re used to represent fixed collections if items: the components of a specific calendar date, for instance.
+
+```
+tuple = (1, 2, 3, 4)
+len(tuple)
+tuple + (5, 6) # concatenation
+tuple[0] # Indexing, slicing, and more
+tuple.index(4) # get the index for a given value
+tuple.count(2) # 2 appears once
+tuple[2] = 34 # tuples are immutable
+tuple[5] = 45 # I said immutable
+```
+
+## Why tuples?
+
+Basically tuples are immutable lists, that's the main point, you can use lists or tuples but the list will be possible to change it. So itpplies in some other cases.
+
+## Files
+
+File objects are Python code's main interface to external files on your computer. They can be used to read and write text memos, audo clips, Excel document
+s, saved email messages, and whatever else you happen to have stored in your machine.
+
+```
+f = open('data.txt', 'w') # make a new file in output mode ('w' is write)
+f.write('Hello\n') # write strings of characters to it
+f.write('world\n') # return number of items written in Python 3.X
+f.close() # close to flush output buffers to disk
+```
+
+
+# Control Flow
+
+## If Statements
+
+The most well known statement type is the `if` statement. For example:
+
+```
+if_statement.py
+```
+
+There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
+
+
+## For Statements
+
+The `for` statement in python differs a bit from whhat you used in C or Pascal. Rather than always iterating over an arithmetic progression of numbers, or giving the user the ability to define both the iteration step and halting condition (as C), Python's `for` statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example:
+
+```
+words = ['cat', 'window', 'defenestrate']
+for w in words:
+  print(w, len(w))
+```
+
+If you need to modify the sequence you are iterating over whie inside the loop (for example to duplicate selected items), it is recommended that you first make a copy. Iterating over a sequence does not implicitly make a copy. The slice notation makes this especially convenient:
+
+```
+for w in words[:]:
+  if len(w) > 6:
+    words.insert(0, w)
+```
+
+## The range function
+
+If you do need to iterate over a sequence of numbers, the built-in function `range()` comes in handy. It generates arithmetic progressions:
+
+```
+for i in range(5):
+  print(i)
+```
+
+* The given end point is never part of the sequence
+* You can also indicate the start
+* You can specify a different increment (even negative; sometimes this is called 'step')
+
+```
+range(5, 10)
+range(0, 10, 3)
+range(-10, -100, -30)
+```
+
+To iterate over the indices of a sequence, you can combine range() and len() as follows:
+
+```
+a = ['Mary', 'had', 'a', 'little', 'lamb']
+for i in range(len(a)):
+  print(i, a[i])
+```
+
+A strange thing happen if you print a range()
+
+```
+print(range(5))
+```
+
+We say such object is **iterable**, that is, suitable as a target for functions and constructs that expect something from which they can obtain successive items until the supply is exhausted. We have seen that the `for` statement is such a **iterator**. The function `list()` is another; is creates lists from **iterables**:
+
+
+```
+list(range(5))
+```
+
+## `break` and `continue` Statements, and `else` Clauses on Loops
+
+The break statement, like in C, breaks out of the smallest enclosing `for` or `while` loop.
+
+
+```
+for_else.py
+```
+
+Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.
+
+The continue statement, also borrowed from C, continues with the next iteration of the loop:
+
+```
+continue.py
+```
+
+## The pass Statements
+
+The pass statement does nothing. It can be used when a statement is required sintatically but the program requires no action, For example:
+
+```
+while True:
+  pass ## Busy wait for keyboard interrupt (Ctrl+C)
+```
+
+Or for creating minimal classes:
+
+```
+class MyEmptyClass:
+  pass
+```
+
+In a work in progress:
+
+```
+def initlog(*args):
+  pass
+```
+
+## The while statement
+
+The while statement is used for repeated execution as long as an expression is true:
+
+```
+count = 0
+while (count < 10):
+  print("The count is %d" % count)
+  count = count + 1
+
+print("Good bye")
+
+```
+
+## Defining functions
+
+```
+ejemplo.py
+```
+
+## Classes
+
+```
+number.py
+```
+
+## Generators
+
+First lets understand iterators. According to Wikipedia, an iterator is an object that enables a programmer to traverse a container, particularly lists. However, an iterator performs traversal and gives access to data elements in a container, but does not perform iteration. You might be confused so lets take it a bit slow. There are three parts namely:
+
+* Iterable
+* Iterator
+* Iteration
+
+## Iterable
+
+An `iterable` in Python is any object which has an `__iter__` or a `__getitem__` method defined which returns an *iterator* or can take indexes.
+
+In a short, an `iterable` is any object which can provide us with an *iterator*.
+
+Iter...what?
+
+## Iterator
+
+An iterator is any object in Python which has a `next` (Python2) or `__next__` method defined. That’s it. That’s an iterator. Now let’s understand iteration.
+
+
+## Iteration
+
+In simple words it is the process of taking an item from something e.g a list. When we use a loop to loop over something it is called iteration. It is the name given to the process itself. Now as we have a basic understanding of these terms let’s understand generators.
+
+## Generators
+
+Generators functions allow you to declare a function that behaves like an iterator, i.e. it can be used in a for loop.
+
+A generator is something that you can iterate over (for us, usually using for ) but whose values are produced only as needed (lazily).
+
+```
+# A dummy example
+
+def generator_function():
+    for i in range(10):
+        yield i
+for i in generator_function():
+    print(i)
+```
+
+It is not really useful in this case. Generators are best for calculating large sets of results (particularly calculations involving loops themselves) where you don’t want to allocate the memory for all results at the same time. Many Standard Library functions that return lists in Python 2 have been modified to return generators in Python 3 because generators require fewer resources.
+
+```
+fibonacci_gen.py
+```
+
+Anoother way to use a generator function is by callling the built in function `next()`
+
+
+## Lambdas
+
+Lambda is a tool for building functions, or more precisely, for building function objects. That means that Python has two tools for building functions: def and lambda.
+
+Blueprint
+
+```
+lambda argument: manipulate(argument)
+```
+
+Normal function definition:
+
+```
+def square_root(x): return math.sqrt(x)
+```
+
+The same function as a lambda:
+
+```
+square_root = lambda x: math.sqrt(x)
+```
+
+Another example
+
+```
+def add(x, y): return x + y
+add = lambda x, y:   x + y
+```
+
+## Why do we need a lambda?
+
+Actually we don't totally need them, but yes in two main cases:
+
+* The function is fairly simple
+* It is going to be used only once
+
+
+## Randomness
+
+```
+import random
+four_uniform_randoms = [random.random() for _ in range(4)]
+```
+
+`random.random()` produces numbers uniformly between 0 and 1
+
+The random module actually produces pseudorandom (that is, deterministic) num‐
+bers based on an internal state that you can set with random.seed if you want to get reproducible results:
+
+```
+random.seed(10)
+random.random()
+```
+
+We can also use `random.randrange()`
+
+```
+random.randrange(10)
+random.randrange(3, 6)
+```
+
+Or `random.choice()`
+
+```
+my_best_friend = random.choice(["Alice", "Bob", "Charlie"])
+```
+
+Or `random.shuffle()`
+
+```
+up_to_ten = range(10)
+random.shuffle(up_to_ten)
+print up_to_ten
+```
+
+## Regex
+
+A regular expression, regex or regexp[1] (sometimes called a rational expression) is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for "find" or "find and replace" operations on strings. [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression)
+
+Metacharacters
+
+```
+. ^ $ * + ? { } [ ] \ | ( )
+```
+
+```
+\d
+    Matches any decimal digit; this is equivalent to the class [0-9].
+\D
+    Matches any non-digit character; this is equivalent to the class [^0-9].
+\s
+    Matches any whitespace character; this is equivalent to the class [ \t\n\r\f\v].
+\S
+    Matches any non-whitespace character; this is equivalent to the class [^ \t\n\r\f\v].
+\w
+    Matches any alphanumeric character; this is equivalent to the class [a-zA-Z0-9_].
+\W
+    Matches any non-alphanumeric character; this is equivalent to the class [^a-zA-Z0-9_].
+```
+
+## Inheritance
+
+```
+pet.py
+dog.py
+```
+
+```
+>>> isinstance(mister_pet, Pet)
+True
+>>> isinstance(mister_pet, Dog)
+False
+>>> isinstance(mister_dog, Pet)
+True
+>>> isinstance(mister_dog, Dog)
+True
+```
+
+## Comprehensions
+
+Comprehensions are constructs that allow sequences to be built from other sequences. Three types of comprehensions are supported in both Python 2 and Python 3:
+
+* list comprehensions
+* dictionary comprehensions
+* set comprehensions
+
+Blueprint
+
+```
+variable = [out_exp for out_exp in input_list if out_exp == 2]
+```
+
+Here's a short example
+
+```
+multiples = [i for i in range(30) if i % 3 == 0]
+print(multiples)
+```
+
+If you have something like this:
+
+```
+squared = []
+for x in range(10):
+    squared.append(x**2)
+```
+
+You can simplify it with a comprehension:
+
+```
+squared = [x**2 for x in range(10)]
+```

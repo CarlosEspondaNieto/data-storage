@@ -1,0 +1,16 @@
+To install pip 3:
+
+
+
+The easiest way I've found to install pip3 (for python3.x packages) on CentOS 7 is:
+
+$ sudo yum install python36-setuptools
+$ sudo easy_install-3.4 pip
+
+You'll need to have the EPEL repository enabled before hand, of course.
+
+You should now be able to run commands like the following to install packages for python3.x:
+
+$ pip3 install foo
+
+

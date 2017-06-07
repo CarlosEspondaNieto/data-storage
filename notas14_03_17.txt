@@ -1,0 +1,48 @@
+Kubernets
+
+Es una herramienta que permite el escalamiento y crecimiento horizontal
+
+crecimiento vertical: es que a un mismo equipo se le aumente la RAM, el disco duro, en general significa mejorar los recursos que tiene un equipo.
+
+crecimiento horizontal: varios nodos vinculados
+
+Load balancer: sirve para redireccionar las peticiones a un servidor.
+La forma de balanceo por default (cuando se cae un servidor) es Round Robin. 
+
+
+Round Robin: es una forma que reparte la carga equitativamente. 
+Otras formas son:
+
+Weigth: reparte la carga, por ejempl, entre dos servidores, 80% y 20%. 
+Health: hace peticiones preguntando ¿estás vivo? 
+
+La forma de crecer más barata es horizontal.
+
+
+Kubernets puede administrar contenedores, cuando la carga aumente quitar un contenedor, cuando suba la carga crear  otro, 
+
+Openshift (PaaS)--> permite    dar plataforma como servicio
+
+Alta disponibilidad--> se refiere a que el sistema esté arriba y reparte su carga en distintos servidores, y tolerancia a fallos (cuando hay muchas peticiones y una de las instancias se cae, se pueda levantar otro contenedor.
+
+bancomer --> 4 data centers. 1 en europa, 3 en américa (1 un mx)
+
+Openshift(PaaS)
+
+IaaS- cuando compartes tus volumenes, red, storage con terceros.
+
+
+OpenStack (IaaS)---> Hace todo el conteo de nodos fisicos, cunatas maquinas virtuales hay en nodos fisicos, redes.
+
+Nube híbrida--> tienes tu nube privada, pero algunos servicios están en la pública.
+
+Componentes de una máquina 
+	Disco duro
+	RAM
+	Procesador/GPU* (Recursos procesamiento)
+	Red
+OpenStack se encarga de ciertos modulos especializados
+Nova--> hace el mapeo de recursos
+
+
+

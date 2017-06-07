@@ -1,0 +1,12 @@
+Hadoop
+Es un framework utilizado para almacenar, procesar datos de forma confiable, distribuida y escalable. Si se cae un proceso, lo vuelve a levantar.
+
+Componentes de Hadoop:
+Hadoop |	procesamiento | almacenamiento  
+	YARN		HDFS (Haddop Distribuited File System)
+	(MapReduce1)
+
+Masters | Resource Manager: tiene toda la información de los nodos donde se ejecutan los clusters |Namenode: es donde van a vivir los metadatos 
+
+Slaves/workers/Nodes | 	    | Datanode	
+

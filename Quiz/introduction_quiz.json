@@ -1,0 +1,56 @@
+{
+	"quiz": [
+		{
+			"question": "Describe with your own words. What is a Data Platform?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "In the 3 V's of big data. How would you describe Variety?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What are the elements of tidy data?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "List the most common format files you know for sharing data",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is web scrapping?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is data integration?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is data processing?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "Mention some common data processing tasks",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "Mention some common data processing tasks",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is Data as a Service?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is DataBase as a Service?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "What is data anlysis?",
+			"answer": "your-answer-here"
+		},
+		{
+			"question": "Mention some typical use cases for data analysis",
+			"answer": "your-answer-here"
+		}
+	]	
+}
