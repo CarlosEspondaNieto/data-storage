@@ -1,0 +1,555 @@
+---
+title: "PostgreSQL"
+author: "Jorge Alcaraz"
+date: "1 de mayo de 2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## PostgreSQL
+
+![PostgreSQL](images/elephant.png)
+
+
+## Bibliography
+
+* https://www.postgresql.org/docs/9.6
+* http://postgresguide.com/
+
+## What is?
+
+PostgreSQL, often simply Postgres, is an object-relational database (ORDBMS) – i.e. an RDBMS, with additional (optional use) "object" features – with an emphasis on extensibility and standards compliance. As a database server, its primary functions are to store data securely and return that data in response to requests from other software applications. It can handle workloads ranging from small single-machine applications to large Internet-facing applications (or for data warehousing) with many concurrent users; on macOS Server, PostgreSQL is the default database; and it is also available for Microsoft Windows and Linux (supplied in most distributions).
+
+## Architectural fundamentals
+
+PostgreSQL uses a client/server model. A PostgreSQL session consists of the following cooperating processes (programs):
+
+* A server process, which manages the database files, accepts connections to the database, from client applications, and performs database actions on behalf of the clients. The database server program is called postgres.
+* The user's client (frontend) application that wants to perforn database operations. Client applications can be very diverse in nature: a client could be a text-oriented tool, a graphical application, a web server that accesses the database to display web pages, or a specialized database maintanence tool.
+
+We usually communicate with a postgres process over a TCP/IP network connection.
+
+The PostgreSQL server can handle multiple concurrent connections from clients. To achieve this is starts ("forks") a new process for each connection. The client and the new server process communicate without intervention by the original postgres process.
+
+## Installing PostgreSQL
+
+For Mac
+
+[PostgresApp](http://postgresapp.com/)
+
+For Linux
+
+Ubuntu/Debian
+
+```
+sudo apt-get install postgresql
+```
+
+Fedora/CentOS/RedHat
+
+* Head over the [PostgreSQL Yum Repository](https://yum.postgresql.org/)
+* Select the version of PostgreSQL that you want to install and then your OS, version and architecture.
+* Download the RPM for your platform (using the link from step 2)
+```
+curl -O http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-centos92-9.2-6.noarch.rpm
+```
+* Install the RPM
+```
+rpm -ivh pgdg-centos92-9.2-6.noarch.rpm
+```
+* Do a quick search which will show you available packages for postgres
+```
+yum list postgres*
+```
+
+```
+yum install postgresql92-server.x86_64 postgresql92-contrib.x86_64 postgresql92-devel.x86_64
+```
+
+On Windows
+
+[Windows Installer](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+
+## Creating and Deleting a Database
+
+```
+$ createdb mydb
+```
+
+```
+$ dropdp mydb
+```
+
+```
+postgres=# CREATE DATABASE mydb;
+```
+
+```
+postgres=# DROP DATABASE mydb;
+```
+
+```
+postgres=# CREATE DATABASE mydb ENCODING 'UTF-8'; 
+```
+
+## Connecting
+
+Just connect to postgres with defaults
+
+```
+$ psql
+```
+
+Connect with user postgres
+
+```
+$ psql -U postgres
+```
+
+Connect with user postgres and using password as ident
+
+```
+$ psql -W postgres
+```
+
+Change to user postgres and then connect
+
+```
+$ sudo su
+$ su postgres
+$ psql
+```
+
+Connect to my newly created database
+
+```
+$ psql mydb
+mydb=# 
+mydb=# SELECT version();
+mydb=# SELECT current_date;
+mydb=# SELECT 2 + 2;
+```
+
+## psql
+
+The psql program has a number of internal commands that are not SQL commands. They begin with the backslash character, "\". For example, you can get help on the syntax of various PostgreSQL commands by typing:
+
+```
+mydb=# \h
+```
+
+To get out of psql 
+
+```
+mydb=# \q
+```
+## Users
+
+
+It's a good practice to have separate users for each of your databases/applications.
+
+```
+CREATE USER jorge WITH PASSWORD 'beeva2014';
+CREATE ROLE
+```
+
+To crceate a database and grant access to the created user:
+
+```
+CREATE DATABASE graduates;
+CREATE DATABASE;
+GRANT ALL PRIVILEGES ON DATABASE graduates to jorge;
+GRANT
+```
+
+Now `jorge` has all privileges on database `graduates`. There are several kinds of privilege:
+
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+* RULE
+* REFERENCES
+* TRIGGER
+* CREATE
+* TEMPORARY
+* EXECUTE
+* USAGE
+
+So, for example:
+
+```
+GRANT SELECT ON DATABAS graduates to jorge;
+GRANT
+```
+
+## Example Database
+
+```
+curl -L -O https://github.com/razeone/data-storage/raw/develop/data/example.dump
+createdb storefront;
+pg_restore --no-owner --dbname storefront example.dump
+psql --dbname storefront
+```
+
+Schema
+
+![Schema](images/schema.png)
+
+
+## Querying Data
+
+Tables
+
+```
+\dt
+\d
+```
+
+Something like `describe table` for MySQL
+
+```
+\d users;
+```
+
+Now that we know the table, we can build our query:
+
+```
+SELECT first_name, last_name, email
+from users;
+```
+
+Filtering data
+
+```
+SELECT email, created_at
+FROM users
+WHERE created_at >= '2010-01-01';
+```
+
+We can also combine with other conditions
+
+```
+SELECT email, created_at
+FROM users
+WHERE created_at >= '2010-01-01'
+AND created_at < '2010-02-01';
+```
+
+Let's create some other tables
+
+```
+CREATE TABLE t1(num INTEGER, name VARCHAR(10));
+CREATE TABLE t2(num INTEGER, value VARCHAR(3));
+INSERT INTO t1(num, name) VALUES(1, 'a');
+INSERT INTO t1(num, name) VALUES(2, 'b');
+INSERT INTO t1 VALUES(3, 'c');
+INSERT INTO t2 VALUES(1, 'xxx'),
+                     (3, 'yyy'),
+                     (5, 'zzz');
+```
+
+## Joins
+
+Joins are when you combine data from two different tables. The means in which you combine them depend on the type of join you use.
+
+```
+\d t1
+\d t2
+```
+
+When two tables are related its done so by keys. We'll explain more on this later, the important part for now is that we can see the product_id on purchases is intended to reference the id field on products. With this we can now construct our query and retrieve as an example 5 purchases
+
+```
+SELECT
+  t1.name,
+  t2.value
+FROM
+  t1,
+  t2
+WHERE
+  t1.num = t2.num;
+```
+
+## CROSS JOIN
+
+```
+SELECT * FROM t1 CROSS JOIN t2;
+```
+
+## INNER JOIN
+
+```
+SELECT * FROM t1 INNER JOIN t2 ON t1.num = t2.num;
+SELECT * FROM t1 INNER JOIN t2 USING (num);
+SELECT * FROM t1 NATURAL INNER JOIN t2;
+```
+
+## LEFT JOIN
+
+```
+SELECT * FROM t1 LEFT JOIN t2 ON t1.num = t2.num;
+SELECT * FROM t1 LEFT JOIN t2 USING (num);
+```
+
+## RIGHT JOIN
+
+```
+SELECT * FROM t1 RIGHT JOIN t2 ON t1.num = t2.num;
+```
+
+## FULL JOIN
+
+```
+SELECT * FROM t1 FULL JOIN t2 ON t1.num = t2.num;
+```
+
+## Views
+
+According to [wikipedia](http://en.wikipedia.org/wiki/View_%28database%29), a view consists of a stored query accesible as a virtual table in a relational database or a set of documents in a document-oriented database composed of the result set of a query or a map and reduce functions.
+
+When to use a view?
+
+Views are useful for many cases. Views are a great way to simplify your data model when providing it to others to work with. Additionally it can simplify working with your data for yourself as well. If you find yourself routinely joining two sets of data in a similar way a view may ease the process of duplicating that many times.
+
+Let's suppose we have a report on purchases per user:
+
+```
+SELECT 
+  users.email,
+  users.created_at as joined,
+  purchases.created_at as purchased,
+  purchases.name 
+FROM 
+  users,
+  purchases
+WHERE 
+  purchases.user_id = users.id;
+```
+
+So we're going to generate a view:
+
+```
+CREATE OR REPLACE VIEW purchases_per_user_view AS
+SELECT 
+  users.email,
+  users.created_at as joined,
+  purchases.created_at as purchased,
+  purchases.name 
+FROM 
+  users,
+  purchases
+WHERE 
+  purchases.user_id = users.id;
+```
+
+## Window Functions
+
+```
+SELECT
+  products.title,
+  products.price,
+  purchase_items.product_id,
+  purchase_items.state,
+  purchase_items.quantity,
+  rank() OVER(
+    PARTITION by purchase_items.state
+    ORDER by products.price
+    DESC)
+FROM
+  purchase_items,
+  products;
+```
+
+Now we can get only the top expensive items:
+
+```
+SELECT *
+FROM
+  (
+    SELECT
+    products.title,
+    products.price,
+    purchase_items.product_id,
+    purchase_items.state,
+    purchase_items.quantity,
+    rank() OVER(
+      PARTITION by purchase_items.state
+      ORDER by products.price
+      DESC)
+  FROM
+    purchase_items,
+    products
+  )
+  sub_query
+WHERE rank = 1;
+```
+
+The best part of this is Postgres will optimize the query for you versus parsing over the entire result set if you were to do this yourself in PL/pgSQL or in your applications code.
+
+## Backup and Restore
+
+For backup we can use `pg_dump`, there are some things to care about when creating backups:
+
+## Backups
+
+* Plaintext format (readable and large) vs. binary format (unreadable and small) vs. tarball (ideal for restore)
+* All of your database or specific schemas/tables
+
+Let's get start, which databases do I have access to?
+
+```
+psql -l
+# Then to create a backup
+pg_dump storefront > storefront.sql
+```
+
+The above will create the plaintext dump of your database. To create a form more suitable you a persistent backup and storage you can use either of the below:
+
+```
+pg_dump -Fc storefront > storefront.bak # compressed binary format
+pg_dump -Ft storefront > storefront.tar # tarball
+```
+
+## Restore
+
+When restoring, there are a few more options that you'll want to consider:
+
+* If the database already exists
+* The format of your backup
+
+If your database already exists you only need to run the following:
+
+```
+pg_restore -Fc database.bak # restore compressed binary format
+pg_restore -Ft database.tar # restore tarball
+```
+
+However, if you're creating your database new from the restore you'll want to run a command similar to the following:
+
+```
+pg_restore -Fc -C database.bak # restore compressed binary format
+pg_restore -Ft -C database.tar # restore tarball
+```
+
+## COPY
+
+Copy allows you to do copy data into and out of tables in your database. It supports several modes including:
+
+* binary
+* tab delimited
+* csv delimited
+
+COPY in action
+
+```
+\copy (SELECT * FROM users) TO '~/users.tsv';
+```
+
+In CSV format:
+
+```
+\copy (SELECT * FROM users) TO '~/users.csv' WITH (FORMAT CSV);
+```
+
+Extracting all employees to a binary file (note the quotes around the word Binary):
+
+```
+\copy (SELECT * FROM employees) TO '~/employees.dat' WITH (FORMAT "Binary");
+```
+
+And the equivalents for loading a table:
+
+```
+\copy employees FROM '~/employees.tsv';
+\copy employees FROM '~/employees.csv' WITH CSV;
+\copy employees FROM '~/employees.dat' WITH BINARY;
+```
+
+## psql
+
+Psql is the interactive terminal for working with Postgres. Theres an abundance of flags available for use when working with psql, but lets focus on some of the most important ones, then how to connect:
+
+* -h the host to connect to
+* -U the user to connect with
+* -p the port to connect to (default is 5432)
+
+Commonly used commands:
+
+```
+\timing
+# List tables
+\d
+# Describe table
+\d tablename
+# List all tables with some additional information
+\d+
+# Describe a table with additional information
+\d+ users
+# List all databases
+\l
+# List all databases with additional information
+\l+
+# List all schemas
+\dn
+# List all functions
+\df
+\df+
+# Connect to another database
+\c dbname
+# Quit postgres shell
+\q 
+# Text editor inside psql
+\e
+```
+
+## Tracking disk usage
+
+Per database
+
+```
+SELECT 
+  pg_size_pretty(pg_database_size('storefront'));
+```
+
+Per table
+
+```
+SELECT
+  pg_size_pretty(pg_relation_size('users'));
+```
+
+Measuring index size
+
+```
+SELECT
+  pg_size_pretty(pg_relation_size('users_pkey'));
+```
+
+Measuring table size along with indexes
+
+```
+SELECT
+  pg_size_pretty(pg_total_relation_size('users'));
+```
+
+## Indexes
+
+An index is a specific structure that organizes a reference to your data that makes it easier to look up. In Postgres it is a copy of the item you wish to index combined with a reference to the actual data location. When accessing data, Postgres will either use some form of an index if it exists or a sequential scan. A sequential scan is when it searches over all of the data before returning the results.
+
+## Advantages and Disadvantages
+
+Indexes are great for accessing your data faster. In most cases adding an index to a column will allow you to query the data faster. However, the trade off is that for each index you have you will insert data at a slower pace. Essentially when you insert your data with an index it must write data to two places as well as maintain the sort on the index as you insert data. Certain indexes additionally will be more effective than others, such as indexes on numbers or timestamps (text is expensive).
+
+## Indexes in action
+
+```
+CREATE INDEX idx_email ON users(email);
+```
+
+## Triggers
+
+## 

@@ -1,0 +1,446 @@
+---
+title: "R_programming_01"
+author: "Jorge Raze"
+date: "9/4/2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Programming
+
+This is the R programming course, we'll try to focus in common tasks performed by a data scientist.
+
+## Bibliography
+
+![Bibliography](images/biblio.png)
+
+(2014 - 2016) R Programming for Data Science
+Roger D. Peng
+Leanpub
+You can get a copy [here](leanpub.com/rprogramming)
+
+## What is R?
+
+R is a dialect of S.
+
+S is a language that was developed by John Chambers and others at the old Bell Telephone Laboratories, originally part of AT&T Corp. S was initiated in 1976 as an internal statistical analysis environment, originally implemented as Fortran libraries. Early versiones of the language did not even contain functions for statistical modeling.
+
+In 1988 the system was rewritten in C and began to resemble the system that we have today (this was Version 3 of the language). The book *Statistical Models in S* by Chambers and Hastie (the white book) documents the statistical analysis functionality.Version 4 of the S language was released in 1988 and is the version that we use today. The book *Programming with Data* by John Chambers (the green book) documents this version of the language.
+
+## Back to R
+
+The R language came to use quite a bit after S had been deeloped. One key limitation of the S language was that it was only available in a commercial package, S-PLUS. In 1991, R was created by Ross Ihaka and Robert Gentleman in the Department of Statistics at the University of Auckland. In 1993 the first announcment of R was made to the public. Ross's and Robert's experience developing R is documented in a 1996 paper in the *Journal of Computational and Graphical Statistics*
+
+ Ross Ihaka and Robert Gentleman. R: A language for data analysis and grapics. Jorual of Computational and Graphical Statistics, 5(3):299-314,1996
+
+In 1995, Martin Mächler made an important contribution by convincing Ross and Robert to use the GNU General Public License to make R free software. This was critical because it allowed for the source code for the entire R system to be accessible to anyone who wanted to tinker with it (more on free software later).
+
+In 1996, a public mailing list was created (the R-help and R-devel lists) and in 1997 the R Core Group was formed, containing some people associated with S and S-PLUS. Currently, the core group controls the source code for R and is solely able to check in changes to the main R source tree. Finally, in 2000 R version 1.0.0 was released to the public.
+
+Fragment from: Roger D. Peng. “R Programming for Data Science”.
+
+## Design of the R System
+
+The primary R system is available from the [Comprehensive R Archive Network](cran.r-project.org), also known as CRAN. CRAN also hosts many add-on packages that can be used to extend the functionality of R.
+
+The R system is divided into 2 conceptual parts:
+
+- The "base" R system that you download from CRAN
+- Everything else
+
+R functionality is divided into a number of *packages*.
+
+- The "base" R system contains, among other things, the `base` package which is required to run R and contains the most fundamental functions.
+- The other packages contained in the "base" system indluce `utils`,`stats`, `datasets`, `graphics`, `grDevices`, `grid`, `methods`, `tools`, `parallel`, `compiler`, `splines`, `tcltk`, `stats4`.
+- There are also "Recommended" packages: `boot`, `class`, `cluster`, `codetools`, `foreign`, `KernSmooth`, `lattice`, `mgcv`, `nlme`, `rpart`, `survival`, `MASS`, `spatial`, `nnet`, `Matrix`.
+
+When you download a fresh installation from CRAN, you get all of the above.
+
+## Other packages
+
+- There are over 4000 packages on CRAN that have been evelope by users and programmers around the world.
+- There are also many packages associated with the [Bioconductor Project](bioconductor.org).
+- People often make packages available on their personal websites; there is no reliable way to keep track of how many packages are available in this fashion.
+- There are a number of packages being developed on repositories like GitHub and BitBucket but there is no reliable listing of all these packages.
+
+## Limitations of R
+
+- Objects must generally be stored in physical memory
+- Functionality is based on consumer demand
+
+
+## R Resources
+
+### Official manuals
+
+As far as getting started with R by reading stuff, there is a course book also available on [CRAN](cran.r-project.org).
+
+- [An Introduction to R](cran.r-project.org/doc/manuals/r-release/R-intro.html)
+
+
+## Installation
+
+On ubuntu
+```
+sudo echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install r-base r-base-dev
+```
+On CentOS
+
+```
+adduser graduate
+passwd graduate
+usermod -aF wheel graduate
+sudo yum install epel-release
+sudo yum install R
+wget https://download2.rstudio.org/rstudio-server-rhel-1.0.44-x86_64.rpm
+sudo yum install --nogpgcheck rstudio-server-rhel-1.0.44-x86_64.rpm
+systemctl status rstudio-server.service
+```
+Then visit http://youriporhostname:8787/
+
+## Getting started
+
+```{r echo=TRUE}
+x <- 1
+print(x)
+msg <- "Hello"
+```
+
+## Evaluation
+
+When a complete expression is entered at the prompt, it is evaluated and te result of the evaluated expression is returned.
+
+```{r echo = T}
+x <- 5 ## nothing printed
+x ## auto printing occurs
+print(x) ## explicit printing
+```
+
+## R Objects
+
+R has five basic or "atomic" classes or objects:
+
+* character
+* numeric (real numbers)
+* integer
+* complex
+* logical (True/False)
+
+The most basic type of R object is a vector. Empty vectors can be created with the `vector()` function. *A vector can only contain objects of the same class.*
+
+The only exception to that rule is a **list**.
+
+## Numbers
+
+Numbers are treated as numeric objects (double precision real numbers).
+
+If you explicitly want an integer, you need to specify the `L` suffix. Ex. `1L`
+
+There is also a spceical number `Inf` which represents infinity. Ex. `1/0`
+
+The value `NaN` represents an undefined value ("not a number") Ex. `0/0`
+
+## Attributes
+
+R objects can contain attirbutes, which are like metadata for the object. For example collumn names on a data frame, other examples are:
+
+* names, dimnames
+* dimensions (e.g. matrices, arrays)
+* class (e.g. integer, numeric)
+* length
+* other user-defined attirbutes/metadata
+
+You can access them with the `attribuutes()` function.
+
+## Creating vectors
+
+The `c()` function can be used to create a vector object. It concatenates things together.
+
+```{r echo=TRUE}
+x <- c(0.5, 0.6) # numeric
+x <- c(TRUE, FALSE) # logical
+x <- c(T, F) # logical
+x <- c("a", "b", "c") # character
+x <- 9:29 # integer
+x <- c(1+0i, 2+4i) # complex
+```
+
+You can also use the `vector()` function to initialize vectors.
+
+```{r echo=TRUE}
+x <- vector("numeric", length=10)
+x
+```
+
+
+## Mixing Objects
+
+You can mix objects in a vector.
+
+```{r echo=TRUE}
+y <- c(1.7, "a") # character
+y <- c(TRUE, 2) # numeric
+y <- c("a", TRUE) # character
+```
+
+In each of case above, we are mixing objects of two different classes in a vector. But remember, the only rule about vectors says this is not allowed. Whe ndifferent objects are mixed in a vector, coercion occurs so that every element in the vector is of the same class.
+
+## Explicit Coercion
+
+Objects can be explicitly coerced from one class to another using the as.* functions, if available.
+
+```{r echo=TRUE}
+x <- 0:6
+class(x)
+as.numeric(x)
+as.logical(x)
+as.character(x)
+```
+
+Sometimes, R can't figure out how to coerce an object and this can result in NAs being produced.
+
+```{r echo=TRUE}
+x <- c("a", "b", "c")
+as.numeric(x)
+as.logical(x)
+as.complex(x)
+```
+
+## Matrices
+
+Matrices are vectors with a **dimension** attribute. The dimension attribute is itself an integer vector of length 2 (rows x columns)
+
+```{r echo=TRUE}
+m <- matrix(nrow = 2, ncol = 3)
+m
+dim(m)
+attributes(m)
+```
+
+Matrices are constructed **column-wise**, so entries can be thought of starting in the "upper left" corner and running down the columns.
+
+```{r echo=TRUE}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+m
+```
+
+You can create a matrix from vectors by adding a dimension attribute.
+
+```{r echo=TRUE}
+m <- 1:10
+m
+dim(m) <- c(2,5)
+m
+```
+
+Matrices can be created by **column-binding** or **row-binding** with the `cbind()` and `rbind()` functions.
+
+```{r echo=TRUE}
+x <- 1:3
+y <- 10:12
+cbind(x, y)
+rbind(x, y)
+```
+
+## Lists
+
+Lists are a special type of vector that can contaian elements of different classes. Lists are very important data type in R and you should get to know them well. Lists, in a combination with the various "apply" functions discussed later, make for a powerful combination.
+
+You can create them with the `list()` function.
+
+```{r echo=TRUE}
+x <- list(1, "a", TRUE, 1+4i)
+x
+```
+
+We can also create an empty list of a prespecified length with the `vector()` function:
+
+```
+x <- vector("list", length=5)
+x
+```
+
+## Factors
+
+“Factors are used to represent categorical data and can be unordered or ordered. One can think of a factor as an integer vector where each integer has a label.”
+
+Using factors with labels is better than using integers because factors are self-describing. Having a variable that has values “Male” and “Female” is better than a variable that has values 1 and 2.
+
+```
+x <- factor(c("yes", "yes", "no", "yes", "no"))
+table(x)
+unclass(x)
+```
+
+The order of the levels of a factor can be set using the levels argument to factor(). This can be important in linear modelling because the first level is used as the baseline level.
+
+```
+x <- factor(c("yes", "yes", "no", "yes", "no"), levels = c("yes", "no"))
+x
+```
+
+## Missing Values
+
+Missing values are denoted by NA or NaN for q undefined mathematical operations.
+
+* is.na() is used to test objects if they are NA
+* is.nan() is used to test for NaN
+* NA values have a class also, so there are integer NA, character NA, etc.
+* A NaN value is also NA but the converse is not true
+
+```
+## Create a vector with NAs in it
+x <- c(1, 2, NA, 10, 3)  
+## Return a logical vector indicating which elements are NA
+is.na(x)    
+## Return a logical vector indicating which elements are NaN
+is.nan(x)
+## Now create a vector with both NA and NaN values
+x <- c(1, 2, NaN, NA, 4)
+is.na(x)
+is.nan(x)
+```
+
+## Data Frames
+
+Data frames are used to store tabular data in R. They are an important type of object in R and are used in a variety of statistical modeling applications.
+
+Data frames are represented as a special type of list where every element of the list has to have the same length. Each element of the list can be thought of as a column and the length of each element of the list is the number of rows.
+
+Data frames are usually created by reading in a dataset using the `read.table()` or `read.csv()`. However, data frames can also be created explicitly with the `data.frame()` function or they can be coerced from other types of objects like lists.
+
+```
+x <- data.frame(foo = 1:4, bar = c(T, T, F, F))
+nrow(x)
+ncol(x)
+dim(x)
+```
+
+## Names
+
+R objects can have names, which is very useful for writing readable code and self-describing objects. Here is an example of assigning names to an integer vector.
+
+```
+x <- 1:3
+names(x)
+names(x) <- c("Los Angeles", "New York", "Florida")
+names(x)
+```
+
+Lists can also have names, which is often very useful.
+
+```
+x <- list("Los Angeles" = 1, Boston = 2, London = 3)
+x
+names(x)
+```
+
+Matrices can have both column and row names.
+
+```
+m <- matrix(1:4, nrow = 2, ncol = 2)
+dimnames(m) <- list(c("a", "b"), c("c", "d"))
+```
+
+Column names and row names can be set separately using the `colnames()` and `rownames()` functions.
+
+```
+colnames(m) <- c("h", "f")
+rownames(m) <- c("x", "z")
+m
+```
+
+Note that for data frames, there is a separate function for setting the row names, the row.names() function. Also, data frames do not have column names, they just have names (like lists). So to set the column names of a data frame just use the names() function. Yes, I know its confusing.
+
+## Getting Data In and Out of R
+
+There are a few principal functions for reading data into R.
+
+* `read.table`, `read.csv` for reading tabular data
+* `readLines` for reading lines of a txt file
+* `source` for reading in R code files (inverse of `dump`)
+* `dget` for reading in R code files (inverse of `dput`)
+* `load`, for reading in saved workspaces
+* `unserialize`, for reading single R objects in binary form
+
+And the analogous functions for writing data into files
+
+* `write.table`, for writing tabular data to text files (i.e. CSV) or connections
+* `writeLines`, for writing character data line-by-line to a file or connection
+* `dump`, for dumping a textual representation of multiple R objects
+* `dput`, for outputting a textual representation of an R object
+* `save`, for saving an arbitrary number of R objects in binary format (possibly compressed) to a file.
+* `serialize`, for converting an R object into a binary format for outputting to a connection (or file).
+
+## Reading data files
+
+### `read.table()`
+
+Read the help file:
+
+```
+? read.table
+```
+
+Important arguments:
+
+* *file*, the name of a file, or a connection
+* *header*, logical indicating if the file has a header line
+* *sep*, a string indicating how the columns are separated
+* *colClasses*, a character vector indicating the class of each column in the dataset
+* *nrows*, the number of rows in the dataset. By default read.table() reads an entire file.
+* *comment.char*, a character string indicating the comment character. This defalts to "#". If there are no commented lines in your file, it’s worth setting this to be the empty string "".
+* *skip*, the number of lines to skip from the beginning
+* *stringsAsFactors*, should character variables be coded as factors? This defaults to TRUE because back in the old days, if you had data that were stored as strings, it was because those strings represented levels of a categorical variable. Now we have lots of data that is text data and they don’t always represent categorical variables.
+
+## Defaults
+
+```
+read.table('somefile.txt')
+```
+
+If you call read.table wit hthe defaults, R will automatically
+
+* skip lines that begin with #
+* figure out how many rows there are (and how much memory needs to be allocated)
+* figure what type of variable is in each column of the table
+
+On the other hand, if you explicitly tell to R what to do with the file it will run faster. The `read.csv()` function is identical to `read.table()` except that some of the defaults are set differently.
+
+## Reading in Larger Datasets with read.table
+
+Try to:
+
+* Read the help page of read.table, which contains many hints 
+* Make a rough calculation of the memory required to store your dataset
+* Set comment.char = "" if there are no commented lines in your file
+* Use the colClasses argument
+
+A quick and dirty way to figure out the classes of each colum is the following:
+
+```
+initial <- read.table("datatable.txt", nrows = 100)
+classes <- sapply(initial, class)
+tabAll <- read.table("datatable.txt", colClasses = classes)
+```
+
+* Figure out how many lines does the dataset contains
+* Figure out how much memory do you have installed
+
+## Calculating Memory requirements for R objects
+
+For example, suppose I have a data frame with 1,500,000 rows and 120 columns, all of which are numeric data. Roughly, how much memory is required to store this data frame? Well, on most modern computers double precision floating point numbers are stored using 64 bits of memory, or 8 bytes. Given that information, you can do the following calculation
+
+```
+1,500,000 × 120 × 8 bytes/numeric	= 1,440,000,000 bytes
+    = 1,440,000,000 / 220 bytes/MB
+    = 1,373.29 MB
+    = 1.34 GB”
+```
